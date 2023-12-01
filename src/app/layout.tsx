@@ -27,8 +27,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-        
+        <link rel="apple-touch-icon" href="/logo512.png"></link>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
