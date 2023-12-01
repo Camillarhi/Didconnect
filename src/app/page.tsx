@@ -54,7 +54,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className=" max-w-[600px] w-[600px] overflow-auto grid gap-20">
+      <div className=" md:max-w-[37.5rem] md:w-[37.5rem] w-[12.5rem] max-w-[12.5rem] overflow-auto grid gap-20">
         <h1>Web5: {myDid}</h1>
         <h1>My name: {JSON.parse(myRecords)?.name}</h1>
         <h1>My age: {JSON.parse(myRecords)?.age}</h1>
