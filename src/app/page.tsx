@@ -9,7 +9,7 @@ It's the original crypto...CRYPTOGRAPHY.
 */
 import { webcrypto } from "node:crypto";
 
-// @ts-ignore
+// @ts-ignore 
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 export default function Home() {
