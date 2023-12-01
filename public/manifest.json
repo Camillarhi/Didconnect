@@ -1,0 +1,24 @@
+{
+  "theme_color": "#000",
+  "background_color": "#000",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Didconnect",
+  "short_name": "Didconnect",
+  "description": "Didconnect. Feel safe in your space 👌",
+  "orientation": "portrait",
+  "categories": ["business", "hospitality", "security", "Web5"],
+  "icons": [
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

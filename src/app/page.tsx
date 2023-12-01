@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Web5 } from "@web5/api";
 
 /*
 Needs globalThis.crypto polyfill. 
@@ -18,22 +17,33 @@ export default function Home() {
   const [myRecords, setMyRecords] = useState<any>(null);
 
   useEffect(() => {
-    connect();
-  }, []);
-
-  useEffect(() => {
     if (web5) getRecords();
   }, [web5]);
 
-  const connect = async () => {
-    const { web5, did } = await Web5.connect();
-    setWeb5(web5);
-    setMyDid(did);
-  };
+  useEffect(() => {
+    const initWeb5 = async () => {
+      // @ts-ignore
+      const { Web5 } = await import("@web5/api/browser");
+
+      try {
+        const { web5, did } = await Web5.connect({ sync: "5s" });
+        setWeb5(web5);
+        setMyDid(did);
+        console.log(web5);
+        if (web5 && did) {
+          console.log("Web5 initialized");
+        }
+      } catch (error) {
+        console.error("Error initializing Web5:", error);
+      }
+    };
+
+    initWeb5();
+  }, []);
 
   const getRecords = async () => {
     const { record } = await web5.dwn.records.create({
-      data: { name: "Hello, Web5!", age: 30 },
+      data: { name: "Jane Doe", age: 30 },
       message: {
         dataFormat: "application/json",
       },
