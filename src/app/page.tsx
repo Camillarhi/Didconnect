@@ -158,15 +158,15 @@ export default function Home() {
         </p>
         <Button className=" w-[9.5625rem]">Add New Guest</Button>
       </div>
-      <div className=" flex gap-x-[1.875rem]">
-        <div className=" w-[65%] gap-y-[1.875rem] flex flex-col">
+      <div className=" flex gap-[1.875rem] flex-col md:flex-row">
+        <div className="md:w-[65%] w-full gap-y-[1.875rem] flex flex-col">
           <StatisticsCards />
-          <div className=" md:w-[49.375rem] md:max-w-[49.375rem] w-[85vw] max-w-[85vw] overflow-auto max-h-[calc(100vh-13.75rem)]">
+          <div className=" w-full max-w-full overflow-auto max-h-[calc(100vh-13.75rem)]">
             <TableGroup data={data} columns={columns} />
           </div>
         </div>
 
-        <div className=" w-[35%] border border-[#272849] rounded-md">
+        <div className=" md:w-[35%] w-full border border-[#272849] rounded-md">
           <div className=" flex justify-between items-center px-4 py-2 h-[3.5rem] border-b-4 border-[#272849]">
             <p className=" font-semibold">Alerts</p>
             <p className="text-violet-300 text-sm font-medium capitalize leading-tight">
