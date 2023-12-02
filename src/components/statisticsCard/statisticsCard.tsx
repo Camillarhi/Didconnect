@@ -9,7 +9,7 @@ export default function StatisticsCard({
   stats: string;
 }) {
   return (
-    <div className="grow shrink basis-0 rounded-md border border-[#272849] flex-col justify-start items-start inline-flex">
+      <div className="grow shrink basis-0 rounded-md border border-[#272849] flex-col justify-start items-start inline-flex h-[9.5rem">
       <div className="self-stretch p-4 shadow-inner justify-start items-center gap-2 inline-flex border border-[#272849]">
         <div className="w-6 h-6 rounded-sm border border-[#272849] justify-center items-center gap-2.5 flex">
           <div className="w-3 h-3 relative bg-[#DBDCDE] rounded-[1.1875rem]" />
