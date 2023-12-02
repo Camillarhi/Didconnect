@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /*
 Needs globalThis.crypto polyfill. 
 This is *not* the crypto you're thinking of.
 It's the original crypto...CRYPTOGRAPHY.
 */
+import SidebarItems from "@/components/SidebarItems/sidebarItems";
 import { webcrypto } from "node:crypto";
 
 // @ts-ignore
@@ -15,6 +16,19 @@ export default function Home() {
   const [web5, setWeb5] = useState<any>(null);
   const [myDid, setMyDid] = useState<any>(null);
   const [myRecords, setMyRecords] = useState<any>(null);
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("./service-worker.js", { scope: "/" })
+        .then(function (registration) {
+          console.log("service worker registered", registration.scope);
+        });
+      navigator.serviceWorker.ready.then(function (registration) {
+        console.log("service worker is ready", registration.scope);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (web5) getRecords();
