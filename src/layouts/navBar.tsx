@@ -3,22 +3,22 @@ import Image from "next/image";
 
 export default function NavBar({ toggle }: { toggle: () => void }) {
   return (
-    <div className="bg-[#151628] h-[3.5rem] w-full flex justify-between items-center px-[1.875rem] py-4 shadow-inner border-b border-b-[#DBDCDE] text-white">
+    <div className="bg-[#151628] h-[3.5rem] w-full flex justify-between items-center px-[1.875rem] py-4 shadow-inner border-b border-[#272849] text-white">
       <div
         className="w-[9.3125rem] h-[2.625rem] px-[1.375rem] justify-start items-center inline-flex md:hidden"
         onClick={() => toggle()}
       >
         <Image alt="" src={"/assets/svgs/logo.svg"} height={400} width={500} />
       </div>
-      <div>
+      <div className=" hidden md:block">
         <BreadCrumbs />
       </div>
       <div className=" flex gap-x-4 w-[10.875rem] h-6">
         <div className="w-[8.875rem] h-6 justify-start items-center gap-1 inline-flex">
           <div className="justify-start items-center gap-2.5 flex">
             <div className="w-6 h-6 justify-center items-center flex">
-              <div className="w-6 h-6 px-[3.32px] pt-[7.75px] pb-[8.12px] bg-violet-700 rounded-[100px] justify-center items-center inline-flex">
-                <div className="w-[17.35px] h-[8.12px] text-center text-white text-[10px] font-semibold font-['Inter'] leading-none">
+              <div className="w-6 h-6 px-[.2075rem] pt-[.4844rem] pb-[.5075rem] bg-violet-700 rounded-[6.25rem] justify-center items-center inline-flex">
+                <div className="w-[1.0844rem] h-[.5075rem] text-center text-white text-[.625rem] font-semibold leading-none">
                   TH
                 </div>
               </div>

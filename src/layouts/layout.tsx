@@ -14,7 +14,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <div className="flex-1">
         <NavBar toggle={toggle} />
-        <div className="bg-[#151628] text-white">{children}</div>
+        <div className="bg-[#151628] text-white px-[1.875rem] pt-6 pb-8 h-[calc(100vh-3.5rem)] max-h-[calc(100vh-3.5rem)] max-w-full overflow-y-auto w-full">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -6,8 +6,13 @@ Needs globalThis.crypto polyfill.
 This is *not* the crypto you're thinking of.
 It's the original crypto...CRYPTOGRAPHY.
 */
-import SidebarItems from "@/components/SidebarItems/sidebarItems";
+import StatisticsCards from "@/components/statisticsCard/statisticsCards";
+import StatusBadge from "@/components/statusBadge/statusBadge";
+import Image from "next/image";
 import { webcrypto } from "node:crypto";
+import TableGroup from "@/components/table/tableGroup";
+import Button from "@/components/button/button";
+import AlertBox from "@/components/alertBox/alertBox";
 
 // @ts-ignore
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
@@ -65,14 +70,118 @@ export default function Home() {
     const readResult = await record.data.text();
     setMyRecords(readResult);
   };
+  const data = [
+    {
+      key: 1,
+      name: "Jane Smith",
+      Status: <StatusBadge status="Active" />,
+      Code: 98680,
+      "Room No.": "Room 2",
+      "Check-out date": "22/3/2023",
+      "": (
+        <Image
+          alt=""
+          src={"/assets/svgs/menu-icon.svg"}
+          height={14}
+          width={14}
+          className=" cursor-pointer"
+        />
+      ),
+    },
+    {
+      key: 2,
+      name: "Jane Smith",
+      Status: <StatusBadge status="Cancelled" />,
+      Code: 98680,
+      "Room No.": "Room 2",
+      "Check-out date": "22/3/2023",
+      "": (
+        <Image
+          alt=""
+          src={"/assets/svgs/menu-icon.svg"}
+          height={14}
+          width={14}
+          className=" cursor-pointer"
+        />
+      ),
+    },
+    {
+      key: 3,
+      name: "Jane Smith",
+      Status: <StatusBadge status="Reserved" />,
+      Code: 98680,
+      "Room No.": "Room 2",
+      "Check-out date": "22/3/2023",
+      "": (
+        <Image
+          alt=""
+          src={"/assets/svgs/menu-icon.svg"}
+          height={14}
+          width={14}
+          className=" cursor-pointer"
+        />
+      ),
+    },
+    {
+      key: 4,
+      name: "Jane Smith",
+      Status: <StatusBadge status="Checked-out" />,
+      Code: 98680,
+      "Room No.": "Room 2",
+      "Check-out date": "22/3/2023",
+      "": (
+        <Image
+          alt=""
+          src={"/assets/svgs/menu-icon.svg"}
+          height={14}
+          width={14}
+          className=" cursor-pointer"
+        />
+      ),
+    },
+  ];
+
+  const columns = [
+    { column: "Code", key: "Code" },
+    { column: "name", key: "name" },
+    { column: "Room No.", key: "Room No." },
+    { column: "Status", key: "Status" },
+    { column: "Check-out date", key: "Check-out date" },
+    { column: "", key: "action" },
+  ];
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className=" md:max-w-[37.5rem] md:w-[37.5rem] w-[12.5rem] max-w-[12.5rem] overflow-auto grid gap-20">
-        <h1>Web5: {myDid}</h1>
-        <h1>My name: {JSON.parse(myRecords)?.name}</h1>
-        <h1>My age: {JSON.parse(myRecords)?.age}</h1>
+    <>
+      <div className=" mb-[1.875rem] flex justify-between items-center">
+        <p className=" font-medium text-[1.625rem] leading-loose">
+          Here&apos;s a rundown of what&apos;s happening today
+        </p>
+        <Button className=" w-[9.5625rem]">Add New Guest</Button>
       </div>
-    </main>
+      <div className=" flex gap-x-[1.875rem]">
+        <div className=" w-[65%] gap-y-[1.875rem] flex flex-col">
+          <StatisticsCards />
+          <div className=" md:w-[49.375rem] md:max-w-[49.375rem] w-[85vw] max-w-[85vw] overflow-auto max-h-[calc(100vh-13.75rem)]">
+            <TableGroup data={data} columns={columns} />
+          </div>
+        </div>
+
+        <div className=" w-[35%] border border-[#272849] rounded-md">
+          <div className=" flex justify-between items-center px-4 py-2 h-[3.5rem] border-b-4 border-[#272849]">
+            <p className=" font-semibold">Alerts</p>
+            <p className="text-violet-300 text-sm font-medium capitalize leading-tight">
+              View Alerts
+            </p>
+          </div>
+
+          <AlertBox title="Guest check-out" status="bg-indigo-950" />
+          <AlertBox title="Attempted security breach" status="bg-rose-600" />
+          <AlertBox title="Guest check-out" status="bg-indigo-950" />
+          <AlertBox title="Guest check-in" status="bg-indigo-950" />
+          <AlertBox title="Guest check-in" status="bg-indigo-950" />
+          <AlertBox title="Guest check-in" status="bg-indigo-950" />
+        </div>
+      </div>
+    </>
   );
 }
