@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Sidebar isOpen={isOpen} sidebarRef={elementRef} />
 
       <div className="flex-1">
-        <NavBar open={toggle} />
+        <NavBar toggle={toggle} isOpen={isOpen} />
         <div className="bg-[#151628] text-white">{children}</div>
       </div>
     </div>

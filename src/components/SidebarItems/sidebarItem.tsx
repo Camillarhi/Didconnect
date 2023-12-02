@@ -1,13 +1,14 @@
-import React from "react";
+import { SidebarItemProps } from "@/types/sidebarItem.type";
+import Link from "next/link";
 
-export type SidebarItemProps = {
-  isActive: boolean;
-  text: string;
-};
-
-export default function SidebarItem({ isActive, text }: SidebarItemProps) {
+export default function SidebarItem({
+  isActive,
+  text,
+  path,
+}: SidebarItemProps) {
   return (
-    <div
+    <Link
+      href={path}
       className={`w-[125px] h-9 pl-3 pr-4 py-1.5 ${
         isActive ? "bg-gray-900 rounded-[41px]" : ""
       } justify-start items-center gap-1 inline-flex`}
@@ -26,6 +27,6 @@ export default function SidebarItem({ isActive, text }: SidebarItemProps) {
       >
         {text}
       </div>
-    </div>
+    </Link>
   );
 }
