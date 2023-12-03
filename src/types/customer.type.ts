@@ -6,4 +6,5 @@ export type CustomerType = {
   contactNumber?: string;
   email?: string;
   avatar?: any;
+  "@type": "customer";
 };

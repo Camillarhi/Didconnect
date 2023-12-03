@@ -1,29 +1,29 @@
 {
-  "protocol": "https://didcomm.org/shared-todo",
+  "protocol": "https://didconnect.org/did-connect",
   "published": true,
   "types": {
     "hotel": {
-      "schema": "https://didcomm.org/shared-todo/schemas/list.json",
+      "schema": "https://didconnect.org/did-connect/schemas/hotel.json",
       "dataFormats": ["application/json"]
     },
     "customer": {
-      "schema": "https://didcomm.org/shared-todo/schemas/todo.json",
+      "schema": "https://didconnect.org/did-connect/schemas/customer.json",
       "dataFormats": ["application/json"]
     },
     "roomcategory": {
-      "schema": "https://didcomm.org/shared-todo/schemas/tofdo.json",
+      "schema": "https://didconnect.org/did-connect/schemas/room-category.json",
       "dataFormats": ["application/json"]
     },
     "room": {
-      "schema": "https://didcomm.org/shared-todo/schemas/todso.json",
+      "schema": "https://didconnect.org/did-connect/schemas/room.json",
       "dataFormats": ["application/json"]
     },
     "booking": {
-      "schema": "https://didcomm.org/shared-todo/schemas/teodo.json",
+      "schema": "https://didconnect.org/did-connect/schemas/booking.json",
       "dataFormats": ["application/json"]
     },
     "roomaccess": {
-      "schema": "https://didcomm.org/shared-todo/schemas/teodo.json",
+      "schema": "https://didconnect.org/did-connect/schemas/room-access.json",
       "dataFormats": ["application/json"]
     }
   },
@@ -37,16 +37,6 @@
         {
           "who": "anyone",
           "can": "write"
-        },
-        {
-          "who": "author",
-          "of": "hotel",
-          "can": "update"
-        },
-        {
-          "who": "author",
-          "of": "hotel",
-          "can": "delete"
         }
       ],
       "roomcategory": {
@@ -59,16 +49,6 @@
             "who": "author",
             "of": "hotel",
             "can": "write"
-          },
-          {
-            "who": "author",
-            "of": "hotel",
-            "can": "update"
-          },
-          {
-            "who": "author",
-            "of": "hotel",
-            "can": "delete"
           }
         ]
       },
@@ -80,44 +60,20 @@
           },
           {
             "who": "author",
-            "of": "hotel",
-            "can": "write"
-          },
-          {
-            "who": "author",
             "of": "room",
-            "can": "update"
-          },
-          {
-            "who": "author",
-            "of": "hotel",
-            "can": "delete"
+            "can": "write"
           }
         ],
         "roomaccess": {
           "$actions": [
             {
-              "who": "author",
-              "of": "hotel",
-              "can": "read"
-            },
-            {
-              "who": "author",
-              "of": "room",
+              "who": "anyone",
               "can": "read"
             },
             {
               "who": "author",
               "of": "room",
               "can": "write"
-            },
-            {
-              "who": "author",
-              "can": "update"
-            },
-            {
-              "of": "room",
-              "can": "delete"
             }
           ]
         }
@@ -132,14 +88,6 @@
         {
           "who": "anyone",
           "can": "write"
-        },
-        {
-          "who": "author",
-          "can": "update"
-        },
-        {
-          "who": "author",
-          "can": "delete"
         }
       ]
     },
@@ -151,19 +99,13 @@
         },
         {
           "who": "author",
+          "of": "booking",
           "can": "read"
         },
         {
           "who": "recipient",
+          "of": "booking",
           "can": "read"
-        },
-        {
-          "who": "author",
-          "can": "update"
-        },
-        {
-          "who": "recipient",
-          "can": "update"
         }
       ]
     }

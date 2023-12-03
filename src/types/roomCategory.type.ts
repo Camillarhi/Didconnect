@@ -3,4 +3,5 @@ export type RoomCategoryType = {
   author: string;
   name: string;
   description: string;
+  "@type": "roomcategory";
 };

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 /*
 Needs globalThis.crypto polyfill. 
@@ -18,10 +18,6 @@ import { webcrypto } from "node:crypto";
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 export default function Home() {
-  const [web5, setWeb5] = useState<any>(null);
-  const [myDid, setMyDid] = useState<any>(null);
-  const [myRecords, setMyRecords] = useState<any>(null);
-
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
@@ -35,44 +31,6 @@ export default function Home() {
     }
   }, []);
 
-  useEffect(() => {
-    if (web5) getRecords();
-  }, [web5]);
-
-  useEffect(() => {
-    const initWeb5 = async () => {
-      // @ts-ignore
-      const { Web5 } = await import("@web5/api/browser");
-      try {
-        const { web5, did } = await Web5.connect({ sync: "5s" });
-        const { web5: web52 } = await Web5.connect({ sync: "5s" });
-
-        console.log({ web5 }, { web52 });
-
-        setWeb5(web5);
-        setMyDid(did);
-        
-        if (web5 && did) {
-          console.log("Web5 initialized");
-        }
-      } catch (error) {
-        console.error("Error initializing Web5:", error);
-      }
-    };
-
-    initWeb5();
-  }, []);
-
-  const getRecords = async () => {
-    const { record } = await web5.dwn.records.create({
-      data: { name: "Jane Doe", age: 30 },
-      message: {
-        dataFormat: "application/json",
-      },
-    });
-    const readResult = await record.data.text();
-    setMyRecords(readResult);
-  };
   const data = [
     {
       key: 1,
