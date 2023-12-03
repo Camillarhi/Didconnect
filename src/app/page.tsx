@@ -43,12 +43,15 @@ export default function Home() {
     const initWeb5 = async () => {
       // @ts-ignore
       const { Web5 } = await import("@web5/api/browser");
-
       try {
         const { web5, did } = await Web5.connect({ sync: "5s" });
+        const { web5: web52 } = await Web5.connect({ sync: "5s" });
+
+        console.log({ web5 }, { web52 });
+
         setWeb5(web5);
         setMyDid(did);
-        console.log(web5);
+        
         if (web5 && did) {
           console.log("Web5 initialized");
         }

@@ -1,0 +1,171 @@
+{
+  "protocol": "https://didcomm.org/shared-todo",
+  "published": true,
+  "types": {
+    "hotel": {
+      "schema": "https://didcomm.org/shared-todo/schemas/list.json",
+      "dataFormats": ["application/json"]
+    },
+    "customer": {
+      "schema": "https://didcomm.org/shared-todo/schemas/todo.json",
+      "dataFormats": ["application/json"]
+    },
+    "roomcategory": {
+      "schema": "https://didcomm.org/shared-todo/schemas/tofdo.json",
+      "dataFormats": ["application/json"]
+    },
+    "room": {
+      "schema": "https://didcomm.org/shared-todo/schemas/todso.json",
+      "dataFormats": ["application/json"]
+    },
+    "booking": {
+      "schema": "https://didcomm.org/shared-todo/schemas/teodo.json",
+      "dataFormats": ["application/json"]
+    },
+    "roomaccess": {
+      "schema": "https://didcomm.org/shared-todo/schemas/teodo.json",
+      "dataFormats": ["application/json"]
+    }
+  },
+  "structure": {
+    "hotel": {
+      "$actions": [
+        {
+          "who": "anyone",
+          "can": "read"
+        },
+        {
+          "who": "anyone",
+          "can": "write"
+        },
+        {
+          "who": "author",
+          "of": "hotel",
+          "can": "update"
+        },
+        {
+          "who": "author",
+          "of": "hotel",
+          "can": "delete"
+        }
+      ],
+      "roomcategory": {
+        "$actions": [
+          {
+            "who": "anyone",
+            "can": "read"
+          },
+          {
+            "who": "author",
+            "of": "hotel",
+            "can": "write"
+          },
+          {
+            "who": "author",
+            "of": "hotel",
+            "can": "update"
+          },
+          {
+            "who": "author",
+            "of": "hotel",
+            "can": "delete"
+          }
+        ]
+      },
+      "room": {
+        "$actions": [
+          {
+            "who": "anyone",
+            "can": "read"
+          },
+          {
+            "who": "author",
+            "of": "hotel",
+            "can": "write"
+          },
+          {
+            "who": "author",
+            "of": "room",
+            "can": "update"
+          },
+          {
+            "who": "author",
+            "of": "hotel",
+            "can": "delete"
+          }
+        ],
+        "roomaccess": {
+          "$actions": [
+            {
+              "who": "author",
+              "of": "hotel",
+              "can": "read"
+            },
+            {
+              "who": "author",
+              "of": "room",
+              "can": "read"
+            },
+            {
+              "who": "author",
+              "of": "room",
+              "can": "write"
+            },
+            {
+              "who": "author",
+              "can": "update"
+            },
+            {
+              "of": "room",
+              "can": "delete"
+            }
+          ]
+        }
+      }
+    },
+    "customer": {
+      "$actions": [
+        {
+          "who": "anyone",
+          "can": "read"
+        },
+        {
+          "who": "anyone",
+          "can": "write"
+        },
+        {
+          "who": "author",
+          "can": "update"
+        },
+        {
+          "who": "author",
+          "can": "delete"
+        }
+      ]
+    },
+    "booking": {
+      "$actions": [
+        {
+          "who": "anyone",
+          "can": "write"
+        },
+        {
+          "who": "author",
+          "can": "read"
+        },
+        {
+          "who": "recipient",
+          "can": "read"
+        },
+        {
+          "who": "author",
+          "can": "update"
+        },
+        {
+          "who": "recipient",
+          "can": "update"
+        }
+      ]
+    }
+  }
+}
