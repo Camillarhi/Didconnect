@@ -1,8 +1,8 @@
 import { StatusEnum } from "@/enums/status.enum";
-import { StatusType } from "@/types/status.type";
+import { BookingStatusType } from "@/types/bookingStatus.type";
 import React from "react";
 
-export default function StatusBadge({ status }: { status: StatusType }) {
+export default function StatusBadge({ status }: { status: BookingStatusType }) {
   const backgroudColor = () => {
     switch (status) {
       case StatusEnum.Active:

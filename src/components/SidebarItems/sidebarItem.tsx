@@ -9,15 +9,15 @@ export default function SidebarItem({
   return (
     <Link
       href={path}
-      className={`w-[125px] h-9 pl-3 pr-4 py-1.5 ${
-        isActive ? "bg-gray-900 rounded-[41px]" : ""
+      className={`w-[7.8125rem] h-9 pl-3 pr-4 py-1.5 ${
+        isActive ? "bg-gray-900 rounded-[2.5625rem]" : ""
       } justify-start items-center gap-1 inline-flex`}
     >
       <div className="w-6 h-6 justify-center items-center gap-2.5 flex">
         <div
           className={`w-3 h-3 relative ${
             isActive ? "bg-[#C9B8FF]" : "bg-[#DBDCDE]"
-          }  rounded-[19px]`}
+          }  rounded-[1.1875rem]`}
         />
       </div>
       <div

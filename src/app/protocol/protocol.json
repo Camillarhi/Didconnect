@@ -1,0 +1,113 @@
+{
+  "protocol": "https://didconnect.org/did-connect",
+  "published": true,
+  "types": {
+    "hotel": {
+      "schema": "https://didconnect.org/did-connect/schemas/hotel.json",
+      "dataFormats": ["application/json"]
+    },
+    "customer": {
+      "schema": "https://didconnect.org/did-connect/schemas/customer.json",
+      "dataFormats": ["application/json"]
+    },
+    "roomcategory": {
+      "schema": "https://didconnect.org/did-connect/schemas/room-category.json",
+      "dataFormats": ["application/json"]
+    },
+    "room": {
+      "schema": "https://didconnect.org/did-connect/schemas/room.json",
+      "dataFormats": ["application/json"]
+    },
+    "booking": {
+      "schema": "https://didconnect.org/did-connect/schemas/booking.json",
+      "dataFormats": ["application/json"]
+    },
+    "roomaccess": {
+      "schema": "https://didconnect.org/did-connect/schemas/room-access.json",
+      "dataFormats": ["application/json"]
+    }
+  },
+  "structure": {
+    "hotel": {
+      "$actions": [
+        {
+          "who": "anyone",
+          "can": "read"
+        },
+        {
+          "who": "anyone",
+          "can": "write"
+        }
+      ],
+      "roomcategory": {
+        "$actions": [
+          {
+            "who": "anyone",
+            "can": "read"
+          },
+          {
+            "who": "author",
+            "of": "hotel",
+            "can": "write"
+          }
+        ]
+      },
+      "room": {
+        "$actions": [
+          {
+            "who": "anyone",
+            "can": "read"
+          },
+          {
+            "who": "author",
+            "of": "room",
+            "can": "write"
+          }
+        ],
+        "roomaccess": {
+          "$actions": [
+            {
+              "who": "anyone",
+              "can": "read"
+            },
+            {
+              "who": "author",
+              "of": "room",
+              "can": "write"
+            }
+          ]
+        }
+      }
+    },
+    "customer": {
+      "$actions": [
+        {
+          "who": "anyone",
+          "can": "read"
+        },
+        {
+          "who": "anyone",
+          "can": "write"
+        }
+      ]
+    },
+    "booking": {
+      "$actions": [
+        {
+          "who": "anyone",
+          "can": "write"
+        },
+        {
+          "who": "author",
+          "of": "booking",
+          "can": "read"
+        },
+        {
+          "who": "recipient",
+          "of": "booking",
+          "can": "read"
+        }
+      ]
+    }
+  }
+}

@@ -1,7 +1,28 @@
+"use client";
 import BreadCrumbs from "@/components/breadCrumbs/breadCrumbs";
+import { useWeb5Connect } from "@/hooks";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function NavBar({ toggle }: { toggle: () => void }) {
+  const { web5 } = useWeb5Connect();
+  const [myRecords, setMyRecords] = useState<any>(null);
+
+  useEffect(() => {
+    if (web5) getRecords();
+  }, [web5]);
+
+  const getRecords = async () => {
+    const { record } = await web5.dwn.records.create({
+      data: { name: "Transcorp Hilton", age: 30 },
+      message: {
+        dataFormat: "application/json",
+      },
+    });
+    const readResult = await record.data.text();
+    setMyRecords(readResult);
+  };
+
   return (
     <div className="bg-[#151628] h-[3.5rem] w-full flex justify-between items-center px-[1.875rem] py-4 shadow-inner border-b border-[#272849] text-white">
       <div
@@ -25,7 +46,7 @@ export default function NavBar({ toggle }: { toggle: () => void }) {
             </div>
           </div>
           <div className="text-white text-xs font-normal leading-none">
-            Transcorp Hilton
+            {JSON.parse(myRecords)?.name}
           </div>
           <div className="w-4 h-4 justify-center items-center flex">
             <div className="w-4 h-4 relative cursor-pointer">

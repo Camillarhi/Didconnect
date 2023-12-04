@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import NavBar from "./navBar";
 import Sidebar from "./sidebar";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function HotelLayout({ children }: { children: ReactNode }) {
   const { isOpen, toggle, close } = useDisclosure();
   const { elementRef } = useListenForOutsideClicks(close);
 
