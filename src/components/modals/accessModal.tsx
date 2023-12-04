@@ -11,7 +11,7 @@ export default function AccessModal({
 }) {
   return (
     <ModalWrapper isOpen={isOpen}>
-      <div className="w-[343px] h-[428px] px-4 pt-4 pb-6 bg-[#191A2F] rounded-lg flex-col justify-start items-start gap-8 inline-flex">
+      <div className="w-[21.4375rem] h-[26.75rem] px-4 pt-4 pb-6 bg-[#191A2F] rounded-lg flex-col justify-start items-start gap-8 inline-flex">
         <div className="self-stretch h-80 flex-col justify-start items-start gap-4 flex">
           <div className="self-stretch pb-4 shadow-inner justify-between items-center inline-flex border-b border-[#272849]">
             <div className="text-white text-sm font-medium capitalize leading-tight">
@@ -23,9 +23,10 @@ export default function AccessModal({
               height={24}
               width={24}
               className=" rounded-md"
+              onClick={close}
             />
           </div>
-          <div className="self-stretch h-[264px] flex-col justify-start items-center gap-4 flex">
+          <div className="self-stretch h-[16.5rem] flex-col justify-start items-center gap-4 flex">
             <div className="self-stretch h-10 flex-col justify-start items-center gap-1 flex">
               <div className="self-stretch text-zinc-300 text-xs font-normal leading-none">
                 Name
@@ -50,7 +51,7 @@ export default function AccessModal({
                 <div className="text-white text-sm font-medium capitalize leading-tight">
                   12:00
                 </div>
-                <div className="w-[5px] h-[5px] bg-gray-500 rounded-full" />
+                <div className="w-[.3125rem] h-[.3125rem] bg-gray-500 rounded-full" />
                 <div className="text-white text-sm font-medium capitalize leading-tight">
                   25 Dec, 2023
                 </div>
@@ -64,7 +65,7 @@ export default function AccessModal({
                 <div className="text-white text-sm font-medium capitalize leading-tight">
                   14:00
                 </div>
-                <div className="w-[5px] h-[5px] bg-gray-500 rounded-full" />
+                <div className="w-[.3125rem] h-[.3125rem] bg-gray-500 rounded-full" />
                 <div className="text-white text-sm font-medium capitalize leading-tight">
                   25 Dec, 2023
                 </div>
@@ -83,7 +84,7 @@ export default function AccessModal({
           </div>
         </div>
         <div className="self-stretch justify-start items-start gap-2 inline-flex">
-          <div className="grow shrink basis-0 px-6 py-2 rounded-[100px] border border-violet-300 flex-col justify-center items-center gap-2.5 inline-flex">
+          <div className="grow shrink basis-0 px-6 py-2 rounded-full border border-violet-300 flex-col justify-center items-center gap-2.5 inline-flex">
             <div
               className="text-center text-violet-300 text-sm font-medium capitalize leading-tight"
               onClick={close}
@@ -91,7 +92,7 @@ export default function AccessModal({
               Close
             </div>
           </div>
-          <div className="grow shrink basis-0 px-6 py-2 bg-red-700 rounded-[100px] flex-col justify-center items-center gap-2.5 inline-flex">
+          <div className="grow shrink basis-0 px-6 py-2 bg-red-700 rounded-full flex-col justify-center items-center gap-2.5 inline-flex">
             <div className="text-center text-white text-sm font-medium capitalize leading-tight">
               Revoke access
             </div>

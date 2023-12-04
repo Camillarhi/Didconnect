@@ -7,6 +7,7 @@ import { useState } from "react";
 import RoomNav from "../roomNav/roomNav";
 import { useDisclosure } from "@/hooks";
 import AccessModal from "@/components/modals/accessModal";
+import BookingDetails from "@/components/bookingDetails/bookingDetails";
 
 export default function UU({ params: { id } }: { params: { id: any } }) {
   const [activeTab, setActiveTab] = useState("Permissions");
@@ -39,7 +40,7 @@ export default function UU({ params: { id } }: { params: { id: any } }) {
                 Maestro
               </div>
             </div>
-            <div className="self-stretch pb-4 shadow-inner justify-between items-start inline-flex">
+            <div className="self-stretch pb-4 shadow-inner justify-between items-start inline-flex border-[#272849] border-b">
               <div className="justify-start items-center gap-1 flex">
                 <div className="w-4 h-4 justify-center items-center flex">
                   <Image
@@ -75,7 +76,6 @@ export default function UU({ params: { id } }: { params: { id: any } }) {
 
         {activeTab === "Permissions" && (
           <>
-            {" "}
             <PermittedUsers onClick={open} />
             <div className="w-full h-[8.125rem] px-4 pt-6 pb-4 bg-gray-900 flex-col justify-start items-center gap-2.5 flex">
               <div className="self-stretch h-10 px-6 py-2.5 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 flex">
@@ -91,6 +91,8 @@ export default function UU({ params: { id } }: { params: { id: any } }) {
             </div>
           </>
         )}
+
+        {activeTab === "Booking details" && <BookingDetails />}
       </div>
 
       <AccessModal isOpen={isOpen} close={close} />
