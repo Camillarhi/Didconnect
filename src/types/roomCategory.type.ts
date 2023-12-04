@@ -3,5 +3,6 @@ export type RoomCategoryType = {
   author: string;
   name: string;
   description: string;
+  price: number;
   "@type": "roomcategory";
 };

@@ -4,7 +4,6 @@ export type BookingType = {
   id?: string;
   author: string;
   recipient: string;
-  code: string;
   status: BookingStatusType;
   checkIn: string;
   checkOut: string;
@@ -12,4 +11,7 @@ export type BookingType = {
   roomCategoryName: string;
   roomNo: string;
   "@type": "booking";
+  name?: string;
+  email?: string;
+  phoneNumber?: string;
 };

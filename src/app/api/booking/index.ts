@@ -105,7 +105,7 @@ export default function useBooking() {
         },
       });
       console.log(
-        `deleted ${bookingData?.code}. status: ${response.status.code}`
+        `deleted ${bookingData?.roomNo}. status: ${response.status.code}`
       );
     } catch (e) {
       console.error(e);

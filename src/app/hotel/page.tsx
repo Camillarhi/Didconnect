@@ -11,6 +11,7 @@ import Button from "@/components/button/button";
 import StatisticsCards from "@/components/statisticsCard/statisticsCards";
 import StatusBadge from "@/components/statusBadge/statusBadge";
 import TableGroup from "@/components/table/tableGroup";
+import HotelLayout from "@/layouts/hotel/hotelLayout";
 import Image from "next/image";
 import { webcrypto } from "node:crypto";
 
@@ -214,7 +215,7 @@ export default function Home() {
   ];
 
   return (
-    <>
+    <HotelLayout>
       <div className=" mb-[1.875rem] flex justify-between items-center">
         <p className=" font-medium md:text-[1.625rem] text-base leading-loose">
           Here&apos;s a rundown of what&apos;s happening today
@@ -239,6 +240,6 @@ export default function Home() {
 
         <Alerts />
       </div>
-    </>
+    </HotelLayout>
   );
 }

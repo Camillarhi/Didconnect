@@ -3,22 +3,22 @@ import { SidebarItemProps } from "@/types/sidebarItem.type";
 export const sidebarItems: SidebarItemProps[] = [
   {
     text: "Home",
-    path: "/",
+    path: "/hotel",
   },
   {
     text: "Bookings",
-    path: "/bookings",
+    path: "/hotel/bookings",
   },
   {
     text: "All Rooms",
-    path: "/all-rooms",
+    path: "/hotel/rooms",
   },
   {
     text: "Guests",
-    path: "/guests",
+    path: "/hotel/guests",
   },
   {
     text: "Alerts",
-    path: "/alerts",
+    path: "/hotel/alerts",
   },
 ];
