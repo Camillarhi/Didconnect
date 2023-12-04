@@ -54,11 +54,21 @@ export default function useBooking() {
           protocolPath: bookingData?.["@type"],
           schema: protocolDefinition.types.booking.schema,
           dataFormat: protocolDefinition.types.booking.dataFormats[0],
+          recipient: bookingData?.recipient,
         },
       });
 
       const data = await record.data.json();
       const createdBooking = { record, data, id: record.id };
+
+      const { status: sendStatus } = await record.send(bookingData?.recipient);
+
+      if (sendStatus.code !== 202) {
+        console.log("Unable to send to target did:" + sendStatus);
+        return;
+      } else {
+        console.log("Shared list sent to recipient");
+      }
 
       return createdBooking;
     } catch (e) {
