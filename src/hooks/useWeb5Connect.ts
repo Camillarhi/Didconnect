@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import protocolDefinition from "../app/protocol/protocol.json";
-import { getAllHotels } from "@/app/api/hotel/getall/getAllHotels";
 
 export default function useWeb5Connect() {
   const [web5, setWeb5] = useState<any>(null);
