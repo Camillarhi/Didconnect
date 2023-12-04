@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function CustomerRoomPreview() {
@@ -27,13 +28,15 @@ export default function CustomerRoomPreview() {
         </div>
       </div>
 
-      <Image
-        alt=""
-        src={"/assets/images/hotel.png"}
-        height={230.363}
-        width={345.545}
-        className=" rounded-md"
-      />
+      <Link href={"/customer/hotel/room/798"}>
+        <Image
+          alt=""
+          src={"/assets/images/hotel.png"}
+          height={230.363}
+          width={345.545}
+          className=" rounded-md"
+        />
+      </Link>
 
       {/* checkin */}
       <div className="w-full h-[2.375rem] justify-between items-start inline-flex">

@@ -10,6 +10,7 @@ export default function BottomNavItems() {
     <div className=" flex justify-between gap-1">
       {bottomNavItems?.map((a) => (
         <BottomNavItem
+          key={a.path}
           text={a.text}
           image={a?.image}
           isActive={pathname === a.path}
