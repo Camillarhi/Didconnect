@@ -2,7 +2,7 @@ import React from "react";
 
 export default function BookingDetails() {
   return (
-    <div className=" flex flex-col gap-y-6 w-[21.4375rem] ">
+    <div className=" flex flex-col gap-y-6 w-full ">
       <div className="h-24 flex-col justify-start items-start gap-4 inline-flex border-b border-[#272849]">
         <div className="text-zinc-300 text-xs font-medium uppercase leading-none">
           Schedule
