@@ -7,7 +7,7 @@ export const bottomNavItems: BottomNavItemProps[] = [
     image: (
       <Image alt="" src={"/assets/svgs/home-icon.svg"} height={12} width={18} />
     ),
-    path: "/customer",
+    path: "/customer/home",
   },
   {
     text: "Explore",

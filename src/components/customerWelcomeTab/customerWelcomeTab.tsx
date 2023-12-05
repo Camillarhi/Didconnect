@@ -4,9 +4,11 @@ import React from "react";
 export default function CustomerWelcomeTab({
   isCheckedIn,
   hotelName,
+  text,
 }: {
-  isCheckedIn: boolean;
+  isCheckedIn?: boolean;
   hotelName: string;
+  text?: string;
 }) {
   return (
     <div className=" h-[3.75rem] flex items-center w-full justify-between">
@@ -14,7 +16,7 @@ export default function CustomerWelcomeTab({
         Hello Rita,
         {!isCheckedIn && (
           <p className=" text-sm leading-5 font-normal text-[#DBDCDE]">
-            How are you doing today?
+            {text}
           </p>
         )}
         {isCheckedIn && (

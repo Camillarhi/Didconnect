@@ -11,7 +11,11 @@ import RoomNav from "../roomNav/roomNav";
 import Link from "next/link";
 import CheckOutModal from "@/components/modals/checkOutModal";
 
-export default function UU({ params: { id } }: { params: { id: any } }) {
+export default function ViewRoomDetails({
+  params: { id },
+}: {
+  params: { id: any };
+}) {
   const [activeTab, setActiveTab] = useState("Permissions");
   const {
     open: openCheckoutModal,
@@ -25,7 +29,7 @@ export default function UU({ params: { id } }: { params: { id: any } }) {
       <MobileGoBack text={`Room ${id}`} backgroundColor="bg-[#151628]" />
 
       <div className=" w-full mt-6 flex-col gap-y-6 justify-start items-start gap-6 inline-flex">
-        <UnlockRoomButton />
+        <UnlockRoomButton id={id} />
 
         <div className="self-stretch flex-col justify-start items-start gap-4 flex">
           <div className=" bg-white rounded-lg justify-center items-center inline-flex">
