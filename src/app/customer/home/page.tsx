@@ -10,7 +10,11 @@ export default function Home() {
 
   return (
     <CustomerLayout>
-      <CustomerWelcomeTab isCheckedIn={isCheckedIn} hotelName="Four seasons" />
+      <CustomerWelcomeTab
+        text="How are you doing today?"
+        isCheckedIn={isCheckedIn}
+        hotelName="Four seasons"
+      />
       {!isCheckedIn && (
         <div className=" h-full flex justify-center items-center flex-col gap-y-[.625rem] w-full">
           <Image
@@ -27,7 +31,7 @@ export default function Home() {
 
       {isCheckedIn && (
         <div className=" mt-8 h-full w-full">
-          <UnlockRoomButton />
+          <UnlockRoomButton id="" />
 
           <CustomerRoomPreview />
         </div>

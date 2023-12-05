@@ -8,7 +8,7 @@ export default function Index() {
       <Link href={"/hotel"}>
         <Button className=" w-[9.5625rem]">Org</Button>
       </Link>
-      <Link href={"/customer"}>
+      <Link href={"/customer/home"}>
         <Button className=" w-[9.5625rem]">Customer</Button>
       </Link>
     </div>
