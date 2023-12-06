@@ -4,6 +4,7 @@ import Hotel from "@/components/hotel/hotel";
 import Input from "@/components/input/input";
 import CustomerLayout from "@/layouts/customer/customerLayout";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function Explore() {
@@ -30,7 +31,9 @@ export default function Explore() {
             />
           </div>
         </div>
-        <Image alt="" src={"/assets/svgs/scan.svg"} height={32} width={32} />
+        <Link href={"/customer/explore/scan"}>
+          <Image alt="" src={"/assets/svgs/scan.svg"} height={32} width={32} />
+        </Link>
       </div>
 
       <div className=" flex flex-col gap-y-8 w-full">
@@ -38,7 +41,7 @@ export default function Explore() {
         <Hotel />
         <Hotel />
         <Hotel />
-        <Hotel /> 
+        <Hotel />
         <Hotel />
       </div>
     </CustomerLayout>

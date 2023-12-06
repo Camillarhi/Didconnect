@@ -20,7 +20,7 @@ export default function UnlockRoomButton({ id }: { id: string }) {
         <>
           <div
             className=" bg-primary w-6 h-6 rounded-full"
-            onDrag={() => setIsClicked(() => true)}
+            onClick={() => setIsClicked(() => true)}
           ></div>
           <div className="text-center text-zinc-300 text-sm font-normal leading-tight">
             Slide to unlock your door

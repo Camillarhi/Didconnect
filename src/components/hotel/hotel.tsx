@@ -1,10 +1,17 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Hotel() {
+  const router = useRouter();
+  const id = 9898;
+
   return (
-    <div className="w-full self-stretch h-fit pb-4 bg-gray-900 shadow-inner flex-col justify-start items-start gap-4 flex border-[#272849] border-b">
-      <div className="w-full bg-white rounded-lg justify-center items-center inline-flex">
+    <div
+      className="w-full self-stretch h-fit pb-4 bg-gray-900 shadow-inner flex-col justify-start items-start gap-4 flex border-[#272849] border-b"
+      onClick={() => router.push(`/customer/explore/hotel/${id}`)}
+    >
+      <div className="w-full rounded-lg justify-center items-center inline-flex">
         <Image
           alt=""
           src={"/assets/images/hotel.png"}

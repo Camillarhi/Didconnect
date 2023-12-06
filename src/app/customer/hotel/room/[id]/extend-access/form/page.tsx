@@ -1,5 +1,7 @@
 "use client";
+import Checkbox from "@/components/checkBox/checkbox";
 import Input from "@/components/input/input";
+import InputGroup from "@/components/input/inputGroup";
 import MobileGoBack from "@/components/mobileGoBack/mobileGoBack";
 import AccessModal from "@/components/modals/accessModal";
 import { useDisclosure } from "@/hooks";
@@ -22,47 +24,30 @@ export default function AccessForm() {
             </div>
           </div>
           <div className="self-stretch h-full flex-col justify-start items-start gap-4 flex">
-            <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
-              <div className="self-stretch text-white text-sm font-normal leading-tight">
-                DID
-              </div>
-              <Input
+            <InputGroup
+              label="DID"
+              type="text"
+              className="h-9 "
+              placeHolder="did:key:z6MkuVEW9MmRiz92zC7nGvoTT2HJWS3rB533j79Y9Z1i8k6d"
+            />
+            <div className="self-stretch h-24 flex-col justify-start items-start gap-2 flex">
+              <InputGroup
+                label="Name"
                 type="text"
                 className="h-9 "
-                placeHolder="did:key:z6MkuVEW9MmRiz92zC7nGvoTT2HJWS3rB533j79Y9Z1i8k6d"
+                placeHolder="Jordan Peters"
               />
-            </div>
-            <div className="self-stretch h-24 flex-col justify-start items-start gap-2 flex">
-              <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
-                <div className="self-stretch text-white text-sm font-normal leading-tight">
-                  Name
-                </div>
-                <Input
-                  type="text"
-                  className="h-9 "
-                  placeHolder="Jordan Peters"
-                />
-              </div>
               <div className="justify-start items-start inline-flex">
-                <div className="py-1 justify-start items-center gap-2 flex">
-                  <label className="cursor-pointer flex items-center">
-                    <input
-                      type="checkbox"
-                      className=" w-5 h-5 accent-[#151628] text-[#151628] cursor-pointer bg-transparent"
-                    />
-                    <span className=" text-white text-xs font-normal leading-none ml-2">
-                      Share with hotel
-                    </span>
-                  </label>
-                </div>
+                <Checkbox label="Share with hotel" />
               </div>
             </div>
-            <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
-              <div className="self-stretch text-white text-sm font-normal leading-tight">
-                Purpose of request
-              </div>
-              <Input type="text" className="h-9 " placeHolder="Guest" />
-            </div>
+
+            <InputGroup
+              label="Purpose of request"
+              type="text"
+              className="h-9 "
+              placeHolder="Guest"
+            />
             <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
               <div className="text-white text-sm font-normal leading-tight">
                 From

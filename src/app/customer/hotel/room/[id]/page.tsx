@@ -32,7 +32,7 @@ export default function ViewRoomDetails({
         <UnlockRoomButton id={id} />
 
         <div className="self-stretch flex-col justify-start items-start gap-4 flex">
-          <div className=" bg-white rounded-lg justify-center items-center inline-flex">
+          <div className="rounded-lg justify-center items-center inline-flex">
             <Image
               alt=""
               src={"/assets/images/hotel.png"}

@@ -3,6 +3,7 @@ import ModalWrapper from "./modalWrapper/modalWrapper";
 import Image from "next/image";
 import Link from "next/link";
 import Input from "../input/input";
+import InputGroup from "../input/inputGroup";
 
 export default function PasteDidModal({
   isOpen,
@@ -29,12 +30,13 @@ export default function PasteDidModal({
               />
             </div>
           </div>
-          <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
-            <div className="self-stretch text-white text-sm font-normal leading-tight">
-              DID
-            </div>
-            <Input type="text" placeHolder="input DID" className="h-9" />
-          </div>
+
+          <InputGroup
+            label="DID"
+            type="text"
+            placeHolder="input DID"
+            className="h-9"
+          />
         </div>
         <div className="self-stretch justify-start items-start gap-2 inline-flex">
           <div
