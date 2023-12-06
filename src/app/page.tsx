@@ -4,9 +4,12 @@ import AlertModal from "@/components/modals/alertModal";
 import { useDisclosure } from "@/hooks";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Index() {
   const { open, isOpen, close } = useDisclosure();
+  const [accountValue, setAccountValue] = useState<"hotel" | "guest">("guest");
+
   return (
     <div className="w-full h-[100vh] px-4 pt-6 pb-10 flex-col justify-between items-center inline-flex">
       <div className="self-stretch h-[21.6088rem] flex-col justify-end items-center gap-10 flex">
@@ -29,7 +32,10 @@ export default function Index() {
           </div>
           <div className="self-stretch h-52 flex-col justify-center items-start gap-6 flex">
             <label
-              onClick={() => open()}
+              onClick={() => {
+                setAccountValue(() => "guest");
+                open();
+              }}
               htmlFor="guest"
               className="self-stretch p-4 rounded border border-[#272849] justify-between items-start inline-flex"
             >
@@ -62,7 +68,10 @@ export default function Index() {
               </div>
             </label>
             <label
-              onClick={() => open()}
+              onClick={() => {
+                setAccountValue(() => "hotel");
+                open();
+              }}
               htmlFor="hotel"
               className="self-stretch p-4 rounded border border-[#272849] justify-between items-start inline-flex"
             >
@@ -107,11 +116,14 @@ export default function Index() {
             Create your wallet
           </div>
         </Link>
-        <div className="self-stretch h-10 px-3 py-2.5 rounded-full flex-col justify-center items-center gap-2 flex">
+        <Link
+          href={`${accountValue === "guest" ? "/customer/home" : "/hotel"}`}
+          className="self-stretch h-10 px-3 py-2.5 rounded-full flex-col justify-center items-center gap-2 flex"
+        >
           <div className="text-center text-violet-300 text-sm font-medium capitalize leading-tight">
             I already have a wallet
           </div>
-        </div>
+        </Link>
       </div>
 
       <AlertModal isOpen={isOpen} close={close} />

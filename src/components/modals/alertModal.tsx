@@ -34,7 +34,7 @@ export default function AlertModal({
           </div>
         </div>
         <div
-          className="h-9 px-6 py-2 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 flex"
+          className="h-9 px-6 py-2 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 flex cursor-pointer"
           onClick={close}
         >
           <div className="text-center text-white text-sm font-medium capitalize leading-tight">
