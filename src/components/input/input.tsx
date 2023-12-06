@@ -1,13 +1,13 @@
 import React, { forwardRef, useImperativeHandle } from "react";
 
-interface Props {
+export type InputProps = {
   placeHolder?: string;
   type: string;
   disabled?: boolean;
   className?: string;
-}
+};
 
-const Input = forwardRef<HTMLInputElement, Props>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ placeHolder, type, className, disabled = false, ...props }, ref) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
 
