@@ -7,7 +7,7 @@ export default function UnlockRoomButton({ id }: { id: string }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (isClicked) router.push(`/customer/hotel/room/${id}/passkey`);
+    if (isClicked) router.push(`/customer/home/hotel/room/${id}/passkey`);
   }, [isClicked]);
 
   return (

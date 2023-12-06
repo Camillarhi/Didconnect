@@ -48,7 +48,7 @@ export default function PasteDidModal({
             </div>
           </div>
           <Link
-            href={"/customer/hotel/room/3ddd/extend-access/form"}
+            href={"/customer/home/hotel/room/3ddd/extend-access/form"}
             className="grow shrink basis-0 px-6 py-2 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 inline-flex cursor-pointer"
           >
             <div className="text-center text-white text-sm font-medium capitalize leading-tight">

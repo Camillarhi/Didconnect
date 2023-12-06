@@ -41,7 +41,7 @@ export default function ViewRoomDetails({
               className=" rounded-md"
             />
           </div>
-          <div className="w-full self-stretch h-[4.25rem] flex-col justify-start items-start gap-2 flex">
+          <div className="w-full self-stretch h-fit flex-col justify-start items-start gap-2 flex">
             <div className="justify-start items-center gap-1 inline-flex">
               <div className="text-white text-base font-semibold leading-normal">
                 Room 101
@@ -49,36 +49,6 @@ export default function ViewRoomDetails({
               <div className="w-[.3125rem] h-[.3125rem] bg-gray-500 rounded-full" />
               <div className="text-white text-base font-semibold leading-normal">
                 Maestro
-              </div>
-            </div>
-            <div className="self-stretch pb-4 shadow-inner justify-between items-start inline-flex border-[#272849] border-b">
-              <div className="justify-start items-center gap-1 flex">
-                <div className="w-4 h-4 justify-center items-center flex">
-                  <Image
-                    alt=""
-                    src={"/assets/svgs/locked.svg"}
-                    height={16}
-                    width={16}
-                    className=" rounded-md"
-                  />{" "}
-                </div>
-                <div className="text-white text-sm font-normal leading-tight">
-                  Locked
-                </div>
-              </div>
-              <div className="justify-start items-center gap-1 flex">
-                <div className="w-5 h-5 justify-center items-center flex">
-                  <Image
-                    alt=""
-                    src={"/assets/svgs/profile-grey.svg"}
-                    height={18}
-                    width={18}
-                    className=" rounded-md"
-                  />{" "}
-                </div>
-                <div className="text-white text-sm font-normal leading-tight">
-                  Unoccupied
-                </div>
               </div>
             </div>
           </div>
@@ -90,7 +60,7 @@ export default function ViewRoomDetails({
             <PermittedUsers onClick={open} />
             <div className="w-full h-[8.125rem] px-4 pt-6 pb-4 bg-gray-900 flex-col justify-start items-center gap-2.5 flex">
               <Link
-                href={`/customer/hotel/room/${id}/extend-access`}
+                href={`/customer/home/hotel/room/${id}/extend-access`}
                 className="self-stretch h-10 px-6 py-2.5 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 flex"
               >
                 <div className="text-center text-white text-sm font-medium capitalize leading-tight cursor-pointer">

@@ -11,8 +11,11 @@ export default function Home() {
   return (
     <CustomerLayout>
       <CustomerWelcomeTab
-        text="How are you doing today?"
-        isCheckedIn={isCheckedIn}
+        text={
+          !isCheckedIn
+            ? "How are you doing today?"
+            : "How are you enjoying your stay at"
+        }
         hotelName="Four seasons"
       />
       {!isCheckedIn && (
