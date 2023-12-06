@@ -12,7 +12,6 @@ export default function Explore() {
     <CustomerLayout>
       <CustomerWelcomeTab
         text="Where would you like to go?"
-        hotelName="Four seasons"
       />
       <div className=" my-6 flex items-center w-full h-fit gap-x-2">
         <div className=" relative w-full">

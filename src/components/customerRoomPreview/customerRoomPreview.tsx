@@ -4,7 +4,7 @@ import React from "react";
 
 export default function CustomerRoomPreview() {
   return (
-    <div className=" mt-6 h-[27rem] w-full bg-[#191A2F] border border-[#272849] rounded-md px-4 py-3 flex flex-col gap-4">
+    <div className=" mt-6 h-fit w-full bg-[#191A2F] border border-[#272849] rounded-md px-4 py-3 flex flex-col gap-4">
       {/* room number */}
       <div className=" h-10 flex justify-between">
         <div>
@@ -28,7 +28,7 @@ export default function CustomerRoomPreview() {
         </div>
       </div>
 
-      <Link href={"/customer/hotel/room/798"}>
+      <Link href={"/customer/home/hotel/room/798"}>
         <Image
           alt=""
           src={"/assets/images/hotel.png"}
@@ -54,37 +54,6 @@ export default function CustomerRoomPreview() {
           </div>
           <div className="text-white text-sm font-medium capitalize leading-tight">
             25 Dec, 2023
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full h-[3.25rem] py-4 justify-between items-start inline-flex border-t border-[#272849]">
-        <div className="justify-start items-center gap-1 flex">
-          <div className="w-4 h-4 justify-center items-center flex">
-            <Image
-              alt=""
-              src={"/assets/svgs/locked.svg"}
-              height={16}
-              width={16}
-              className=" rounded-md"
-            />{" "}
-          </div>
-          <div className="text-white text-sm font-normal leading-tight">
-            Locked
-          </div>
-        </div>
-        <div className="justify-start items-center gap-1 flex">
-          <div className="w-5 h-5 justify-center items-center flex">
-            <Image
-              alt=""
-              src={"/assets/svgs/profile-grey.svg"}
-              height={18}
-              width={18}
-              className=" rounded-md"
-            />{" "}
-          </div>
-          <div className="text-white text-sm font-normal leading-tight">
-            Unoccupied
           </div>
         </div>
       </div>

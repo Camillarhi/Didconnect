@@ -16,7 +16,7 @@ export default function ExtendAccess() {
             <div className="w-full h-full relative"></div>
           </div>
           <Link
-            href={"/customer/hotel/room/3ddd/extend-access/form"}
+            href={"/customer/home/hotel/room/3ddd/extend-access/form"}
             className="self-stretch h-[5.1875rem] px-6 py-2.5 bg-indigo-950 rounded-full flex-col justify-center items-center gap-2.5 flex cursor-pointer"
           >
             <div className="text-center text-white text-base font-semibold leading-normal ">
