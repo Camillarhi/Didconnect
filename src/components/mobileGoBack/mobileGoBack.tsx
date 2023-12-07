@@ -6,9 +6,13 @@ import React from "react";
 export default function MobileGoBack({
   text,
   backgroundColor,
+  rightText,
+  rightTextClick,
 }: {
   text: string;
   backgroundColor: string;
+  rightText?: string;
+  rightTextClick?: () => void;
 }) {
   const router = useRouter();
 
@@ -29,8 +33,15 @@ export default function MobileGoBack({
         />
       </div>
       <div className="text-white text-xs font-normal leading-none">{text}</div>
-      <div className="w-6 h-6 opacity-0 justify-center items-center flex">
-        <div className="w-6 h-6 relative"></div>
+      <div>
+        {rightText && (
+          <p
+            className=" text-[#C9B8FF] text-xs font-medium mr-4 cursor-pointer"
+            onClick={rightTextClick}
+          >
+            {rightText}
+          </p>
+        )}
       </div>
     </div>
   );
