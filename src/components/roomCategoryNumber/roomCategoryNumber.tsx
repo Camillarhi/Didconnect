@@ -39,7 +39,7 @@ export default function RoomCategoryNumber({ id }: { id: string }) {
 
       <div className="w-full h-10 justify-end items-start gap-4 inline-flex">
         <Link
-          href={`/customer/explore/hotel/${id}/booking-information`}
+          href={`/customer/explore/hotel/${id}`}
           className="grow shrink basis-0 px-6 py-2.5 rounded-full border border-violet-300 flex-col justify-center items-center gap-2 inline-flex"
         >
           <div className="text-center text-violet-300 text-sm font-medium capitalize leading-tight">

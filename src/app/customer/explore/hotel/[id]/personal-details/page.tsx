@@ -82,11 +82,14 @@ export default function PersonalDetails({
               Cancel
             </div>
           </Link>
-          <div className="grow shrink basis-0 px-6 py-2.5 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 inline-flex">
+          <Link
+            href={`/customer/explore/hotel/${id}/booking-information`}
+            className="grow shrink basis-0 px-6 py-2.5 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 inline-flex"
+          >
             <div className="text-center text-white text-sm font-medium capitalize leading-tight">
               Next
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
