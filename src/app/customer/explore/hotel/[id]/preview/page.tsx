@@ -30,7 +30,7 @@ export default function Preview({
       />
       <div className="w-full h-[95vh] mt-6 px-4 pt-6 pb-10 flex-col justify-between items-center inline-flex">
         <div className="self-stretch h-[26.25rem] flex-col justify-start items-start gap-4 flex">
-          <div className="self-stretch h-[164px] pb-4 bg-gray-900 shadow-inner flex-col justify-start items-end gap-4 flex">
+          <div className="self-stretch h-[10.25rem] pb-4 bg-gray-900 shadow-inner flex-col justify-start items-end gap-4 flex">
             <div className="self-stretch justify-start items-start gap-2 inline-flex">
               <CategoryImages />
               <CategoryImages />
@@ -60,7 +60,7 @@ export default function Preview({
               </div>
             </div>
           </div>
-          <div className="self-stretch h-[100px] flex-col justify-start items-start gap-4 flex">
+          <div className="self-stretch h-[6.25rem] flex-col justify-start items-start gap-4 flex">
             <div className="self-stretch justify-between items-center inline-flex">
               <div className="text-zinc-300 text-xs font-medium uppercase leading-none">
                 Schedule
@@ -88,7 +88,7 @@ export default function Preview({
               </div>
             </div>
           </div>
-          <div className="self-stretch h-[124px] flex-col justify-start items-start gap-4 flex">
+          <div className="self-stretch h-[7.75rem] flex-col justify-start items-start gap-4 flex">
             <div className="text-zinc-300 text-xs font-medium uppercase leading-none">
               Pricing
             </div>

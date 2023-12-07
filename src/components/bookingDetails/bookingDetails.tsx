@@ -7,7 +7,7 @@ export default function BookingDetails() {
         <div className="text-zinc-300 text-xs font-medium uppercase leading-none">
           Schedule
         </div>
-        <div className="self-stretch h-16 pb-4 bg-gray-900 shadow-inner flex-col justify-start items-start gap-2 flex">
+        <div className="self-stretch h-16 pb-4 shadow-inner flex-col justify-start items-start gap-2 flex">
           <div className="self-stretch justify-between items-center inline-flex">
             <div className="text-zinc-300 text-xs font-normal leading-none">
               Check-in
@@ -26,7 +26,7 @@ export default function BookingDetails() {
           </div>
         </div>
       </div>
-      <div className="w-[343px] h-[124px] flex-col justify-start items-start gap-4 inline-flex">
+      <div className="w-full h-[7.75rem] flex-col justify-start items-start gap-4 inline-flex">
         <div className="text-zinc-300 text-xs font-medium uppercase leading-none">
           Pricing
         </div>
