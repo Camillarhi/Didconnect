@@ -1,6 +1,7 @@
 "use client";
 import InputGroup from "@/components/input/inputGroup";
 import RegisterTabGuide from "@/components/registerGuideTab/registerTabGuide";
+import Link from "next/link";
 
 export default function RegisterGuest() {
   return (
@@ -32,14 +33,15 @@ export default function RegisterGuest() {
           placeHolder="+234947993"
         />
       </div>
-      <div
+      <Link
+        href={"/customer/home"}
         className=" mt-3 self-stretch h-10 px-6 py-2.5 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 flex"
         // onClick={() => open()}
       >
         <div className="text-center text-white text-sm font-medium capitalize leading-tight">
           Finish
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

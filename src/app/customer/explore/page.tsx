@@ -11,6 +11,7 @@ export default function Explore() {
   return (
     <CustomerLayout>
       <CustomerWelcomeTab
+      title=" Hello Rita,"
         text="Where would you like to go?"
       />
       <div className=" my-6 flex items-center w-full h-fit gap-x-2">
