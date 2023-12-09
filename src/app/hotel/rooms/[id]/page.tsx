@@ -1,6 +1,8 @@
 "use client";
 import AlertBox from "@/components/alertBox/alertBox";
 import Input from "@/components/input/input";
+import RequestAccessModal from "@/components/modals/requestAccessModal";
+import { useDisclosure } from "@/hooks";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
 import Image from "next/image";
 
@@ -9,6 +11,8 @@ export default function RoomDetails({
 }: {
   params: { id: string };
 }) {
+  const { isOpen, close, open } = useDisclosure();
+
   return (
     <HotelLayout>
       <div className="justify-start items-center gap-2 inline-flex">
@@ -269,7 +273,10 @@ export default function RoomDetails({
                 </div>
               </div>
               <div className="self-stretch h-[4.5rem] py-4 bg-gray-900 flex-col justify-start items-start gap-1 flex">
-                <div className="px-6 py-2.5 rounded-[6.25rem] border border-violet-300 flex-col justify-center items-center gap-2 flex">
+                <div
+                  className="px-6 py-2.5 rounded-[6.25rem] border border-violet-300 flex-col justify-center items-center gap-2 flex cursor-pointer"
+                  onClick={() => open()}
+                >
                   <div className="text-center text-violet-300 text-sm font-medium capitalize leading-tight">
                     Request access to room
                   </div>
@@ -279,6 +286,7 @@ export default function RoomDetails({
           </div>
         </div>
       </div>
+      <RequestAccessModal isOpen={isOpen} close={close} />
     </HotelLayout>
   );
 }

@@ -2,11 +2,13 @@
 import BreadCrumbs from "@/components/breadCrumbs/breadCrumbs";
 import { useWeb5Connect } from "@/hooks";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function NavBar({ toggle }: { toggle: () => void }) {
   const { web5 } = useWeb5Connect();
   const [myRecords, setMyRecords] = useState<any>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (web5) getRecords();
@@ -37,7 +39,10 @@ export default function NavBar({ toggle }: { toggle: () => void }) {
       <div className=" flex gap-x-4 w-[10.875rem] h-6">
         <div className="w-[8.875rem] h-6 justify-start items-center gap-1 inline-flex">
           <div className="justify-start items-center gap-2.5 flex">
-            <div className="w-6 h-6 justify-center items-center flex">
+            <div
+              className="w-6 h-6 justify-center items-center flex cursor-pointer"
+              onClick={() => router.replace("/hotel/profile")}
+            >
               <div className="w-6 h-6 px-[.2075rem] pt-[.4844rem] pb-[.5075rem] bg-violet-700 rounded-[6.25rem] justify-center items-center inline-flex">
                 <div className="w-[1.0844rem] h-[.5075rem] text-center text-white text-[.625rem] font-semibold leading-none">
                   TH

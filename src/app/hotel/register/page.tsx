@@ -87,7 +87,7 @@ export default function RegisterHotel() {
                   onClick={() =>
                     document.getElementById("upload-hotel-images")?.click()
                   }
-                  className=" cursor-pointer w-[3.9375rem] h-11 pl-[1.375rem] pr-[1.3125rem] py-3 bg-gray-900 rounded-lg border border-slate-600 justify-center items-center inline-flex"
+                  className=" cursor-pointer w-[3.9375rem] h-11 pl-[1.375rem] pr-[1.3125rem] py-3 bg-gray-900 rounded-lg border border-slate-600 justify-center items-center inline-flex border-dashed"
                 >
                   <Image
                     alt=""

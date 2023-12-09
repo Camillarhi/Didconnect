@@ -1,14 +1,18 @@
 "use client";
 import Button from "@/components/button/button";
 import Input from "@/components/input/input";
+import AddRoomModal from "@/components/modals/addRoomModal";
 import TableGroup from "@/components/table/tableGroup";
 import { data, columns } from "@/constants/tempTableData.constant";
+import { useDisclosure } from "@/hooks";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
 import Image from "next/image";
 import router from "next/router";
 import React from "react";
 
 export default function Rooms() {
+  const { isOpen, close, open } = useDisclosure();
+
   return (
     <HotelLayout>
       <div className=" mb-[1.875rem] flex justify-between">
@@ -21,7 +25,7 @@ export default function Rooms() {
           </p>
         </div>
 
-        <Button className=" w-[7.375rem]" onClick={() => router.replace("")}>
+        <Button className=" w-[7.375rem]" onClick={() => open()}>
           Add room
         </Button>
       </div>
@@ -90,6 +94,7 @@ export default function Rooms() {
           <TableGroup data={data} columns={columns} />
         </div>
       </div>
+      <AddRoomModal close={close} isOpen={isOpen} />
     </HotelLayout>
   );
 }
