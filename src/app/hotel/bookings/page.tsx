@@ -5,9 +5,11 @@ import TableGroup from "@/components/table/tableGroup";
 import { columns, data } from "@/constants/tempTableData.constant";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Bookings() {
+  const router = useRouter();
   return (
     <HotelLayout>
       <div className=" mb-[1.875rem] flex justify-between">
@@ -20,13 +22,18 @@ export default function Bookings() {
           </p>
         </div>
 
-        <Button className=" w-[9.5625rem]">Add New Guest</Button>
+        <Button
+          className=" w-[9.5625rem]"
+          onClick={() => router.replace("/hotel/bookings/add-new-guest")}
+        >
+          Add New Guest
+        </Button>
       </div>
 
       <div className=" w-full border rounded-md h-full border-[#272849]">
         <div className="w-full h-[4.5rem] px-6 py-[1.125rem] justify-between items-center inline-flex">
           <div className="grow shrink basis-0 h-8 justify-start items-start gap-0.5 flex">
-            <div className="w-[87px] px-2 py-1.5 bg-indigo-950 rounded justify-start items-center flex cursor-pointer">
+            <div className=" px-2 py-1.5 bg-indigo-950 rounded justify-start items-center flex cursor-pointer">
               <div className="text-center text-violet-300 text-xs font-medium leading-none">
                 All bookings
               </div>

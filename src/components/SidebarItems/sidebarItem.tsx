@@ -23,7 +23,7 @@ export default function SidebarItem({
       <div
         className={`${
           isActive ? "text-[#C9B8FF]" : "text-[#DBDCDE]"
-        } text-xs font-medium font-['Inter'] capitalize leading-tight`}
+        } text-xs font-medium capitalize leading-tight`}
       >
         {text}
       </div>

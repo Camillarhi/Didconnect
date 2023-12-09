@@ -14,6 +14,10 @@ export const sidebarItems: SidebarItemProps[] = [
     path: "/hotel/rooms",
   },
   {
+    text: "Categories",
+    path: "/hotel/categories",
+  },
+  {
     text: "Guests",
     path: "/hotel/guests",
   },

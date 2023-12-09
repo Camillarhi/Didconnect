@@ -9,7 +9,7 @@ export default function BreadCrumbs() {
 
   useEffect(() => {
     if (pathname) {
-      if (pathname === "/") {
+      if (pathname === "/hotel") {
         setFirstCrumbText("Home");
         setSecondCrumbText("");
         return;
@@ -24,8 +24,9 @@ export default function BreadCrumbs() {
 
   const processPathName = () => {
     let inputString = pathname;
-    if (inputString.startsWith("/")) {
-      inputString = inputString.substring(1);
+    if (inputString.startsWith("/hotel/")) {
+      // inputString = inputString.substring(1);
+      inputString = inputString?.replace("/hotel/", "");
     }
     const parts = inputString.split("/");
 
