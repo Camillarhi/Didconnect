@@ -7,7 +7,16 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Index() {
-  const { open, isOpen, close } = useDisclosure();
+  const {
+    open: openHotelAlertModal,
+    isOpen: isHotelAlertModalOpen,
+    close: closeHotelAlertModal,
+  } = useDisclosure();
+  const {
+    open: openHotelGuestAlertModal,
+    isOpen: isHotelGuestAlertModalOpen,
+    close: closeHotelGuestAlertModal,
+  } = useDisclosure();
   const [accountValue, setAccountValue] = useState<"hotel" | "guest">("guest");
 
   return (
@@ -35,7 +44,7 @@ export default function Index() {
               <label
                 onClick={() => {
                   setAccountValue(() => "guest");
-                  open();
+                  openHotelGuestAlertModal();
                 }}
                 htmlFor="guest"
                 className="self-stretch p-4 rounded border border-[#272849] justify-between items-start inline-flex"
@@ -71,7 +80,7 @@ export default function Index() {
               <label
                 onClick={() => {
                   setAccountValue(() => "hotel");
-                  open();
+                  openHotelAlertModal();
                 }}
                 htmlFor="hotel"
                 className="self-stretch p-4 rounded border border-[#272849] justify-between items-start inline-flex"
@@ -134,7 +143,18 @@ export default function Index() {
         </div>
       </div>
 
-      <AlertModal isOpen={isOpen} close={close} />
+      <AlertModal
+        title="Please switch to Desktop"
+        description="This app is more accessible on desktop devices for Hotel Owners. Kindly switch or proceed as a Hotel Guest"
+        isOpen={isHotelAlertModalOpen}
+        close={closeHotelAlertModal}
+      />
+      <AlertModal
+        title="Please switch to Mobile"
+        description="This app is more accessible on mobile devices for Hotel Guests. Kindly switch or proceed as a Hotel Owner"
+        isOpen={isHotelGuestAlertModalOpen}
+        close={closeHotelGuestAlertModal}
+      />
     </div>
   );
 }

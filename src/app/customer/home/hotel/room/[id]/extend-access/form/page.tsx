@@ -29,6 +29,7 @@ export default function AccessForm() {
               type="text"
               className="h-9 "
               placeHolder="did:key:z6MkuVEW9MmRiz92zC7nGvoTT2HJWS3rB533j79Y9Z1i8k6d"
+              props={{}}
             />
             <div className="self-stretch h-24 flex-col justify-start items-start gap-2 flex">
               <InputGroup
@@ -36,6 +37,7 @@ export default function AccessForm() {
                 type="text"
                 className="h-9 "
                 placeHolder="Jordan Peters"
+                props={{}}
               />
               <div className="justify-start items-start inline-flex">
                 <Checkbox label="Share with hotel" />
@@ -47,6 +49,7 @@ export default function AccessForm() {
               type="text"
               className="h-9 "
               placeHolder="Guest"
+              props={{}}
             />
             <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
               <div className="text-white text-sm font-normal leading-tight">

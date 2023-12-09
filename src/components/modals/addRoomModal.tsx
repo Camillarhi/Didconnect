@@ -35,6 +35,7 @@ export default function AddRoomModal({
               type="number"
               className="h-9 "
               placeHolder="101"
+              props={{}}
             />
 
             <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex w-full">

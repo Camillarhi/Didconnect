@@ -9,6 +9,7 @@ import React, { useState } from "react";
 
 export default function RegisterHotel() {
   const [formSteps, setFormSteps] = useState<number>(3);
+  const [password, setPassword] = useState<string>("");
 
   return (
     <div className="bg-[#151628] text-white px-4 py-6 h-full max-h-full max-w-full overflow-y-auto w-full">
@@ -21,7 +22,13 @@ export default function RegisterHotel() {
         />
       </div>
 
-      {formSteps === 1 && <Passcode next={() => setFormSteps(2)} />}
+      {formSteps === 1 && (
+        <Passcode
+          next={() => setFormSteps(2)}
+          password={password}
+          setPassword={setPassword}
+        />
+      )}
 
       {formSteps === 2 && (
         <div className="md:flex md:justify-center md:items-center w-full md:mt-[3.5rem] md:flex-col">
@@ -36,13 +43,15 @@ export default function RegisterHotel() {
                 type="text"
                 className="h-9 "
                 placeHolder="Jordan Peters"
+                props={{}}
               />
 
               <InputGroup
                 label="Business email address"
-                type="text"
+                type="email"
                 className="h-9 "
                 placeHolder="Jordan@Peters.com"
+                props={{}}
               />
 
               <InputGroup
@@ -50,6 +59,7 @@ export default function RegisterHotel() {
                 type="text"
                 className="h-9 "
                 placeHolder="+234947993"
+                props={{}}
               />
             </div>
           </div>

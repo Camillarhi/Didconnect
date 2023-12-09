@@ -1,17 +1,20 @@
 "use client";
 import RegisterTabGuide from "@/components/registerGuideTab/registerTabGuide";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import OtpInput from "react18-input-otp";
 
-export default function Passcode({ next }: { next: () => void }) {
-  const [password, setPassword] = useState<string>("");
+export default function Passcode({
+  next,
+  password,
+  setPassword,
+}: {
+  next: () => void;
+  password: string;
+  setPassword: (a: any) => void;
+}) {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isConfirmPassword, setIsConfirmPassword] = useState<boolean>(false);
   const [isPasswordEqual, setIsPasswordEqual] = useState<boolean>(true);
-  const router = useRouter();
-
   const handlePasswordChange = (enteredOtp: any) => {
     setPassword(enteredOtp);
   };
