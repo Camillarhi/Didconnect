@@ -9,17 +9,18 @@ It's the original crypto...CRYPTOGRAPHY.
 import Alerts from "@/components/alerts/alerts";
 import Button from "@/components/button/button";
 import StatisticsCards from "@/components/statisticsCard/statisticsCards";
-import StatusBadge from "@/components/statusBadge/statusBadge";
 import TableGroup from "@/components/table/tableGroup";
-import HotelLayout from "@/layouts/hotel/hotelLayout";
-import Image from "next/image";
-import { webcrypto } from "node:crypto";
 import { columns, data } from "@/constants/tempTableData.constant";
+import HotelLayout from "@/layouts/hotel/hotelLayout";
+import { webcrypto } from "node:crypto";
+import { useRouter } from "next/navigation";
 
 // @ts-ignore
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 export default function Home() {
+  const router = useRouter();
+
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
@@ -39,7 +40,12 @@ export default function Home() {
         <p className=" font-medium md:text-[1.625rem] text-base leading-loose">
           Here&apos;s a rundown of what&apos;s happening today
         </p>
-        <Button className=" w-[9.5625rem]">Add New Guest</Button>
+        <Button
+          className=" w-[9.5625rem]"
+          onClick={() => router.replace("/hotel/bookings/add-new-guest")}
+        >
+          Add New Guest
+        </Button>
       </div>
       <div className=" flex gap-[1.875rem] flex-col md:flex-row">
         <div className="md:w-[65%] w-full gap-y-[1.875rem] flex flex-col">
