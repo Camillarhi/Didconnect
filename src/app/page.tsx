@@ -110,7 +110,11 @@ export default function Index() {
         </div>
         <div className="self-stretch h-[5.625rem] flex-col justify-start items-center gap-2.5 flex md:mt-10">
           <Link
-            href={"/customer/register/passcode"}
+            href={`${
+              accountValue === "hotel"
+                ? "/hotel/register"
+                : "/customer/register"
+            }`}
             className="self-stretch h-10 px-6 py-2.5 bg-primary rounded-full flex-col justify-center items-center gap-2.5 flex"
           >
             <div className="text-center text-white text-sm font-medium capitalize leading-tight">
@@ -118,7 +122,9 @@ export default function Index() {
             </div>
           </Link>
           <Link
-            href={`${accountValue === "guest" ? "/customer/login" : "/hotel"}`}
+            href={`${
+              accountValue === "guest" ? "/customer/login" : "/hotel/login"
+            }`}
             className="self-stretch h-10 px-3 py-2.5 rounded-full flex-col justify-center items-center gap-2 flex"
           >
             <div className="text-center text-violet-300 text-sm font-medium capitalize leading-tight">

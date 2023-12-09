@@ -12,7 +12,7 @@ export default function Login() {
       alert("passcode must be up to 6");
     }
 
-    router.replace("/customer/home");
+    router.replace("/hotel");
   };
 
   return (
