@@ -1,5 +1,5 @@
 {
-  "protocol": "https://didconnect.org/did-connect",
+  "protocol": "https://didconnect.org/did-connectt",
   "published": true,
   "types": {
     "account": {
@@ -35,8 +35,7 @@
     "account": {
       "$actions": [
         {
-          "who": "author",
-          "of": "account",
+          "who": "anyone",
           "can": "read"
         },
         {

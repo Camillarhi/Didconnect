@@ -1,7 +1,9 @@
+"use client";
 import useAccount from "@/hooks/useAccount";
 import useCustomer from "@/hooks/useCustomer";
 import useGetUserAccount from "@/hooks/useGetUserAccount";
 import useHashValue from "@/hooks/useHashValue";
+import useWeb5Instance from "@/hooks/useWeb5Instance";
 import { AccountType } from "@/types/account.type";
 import { CustomerType } from "@/types/customer.type";
 import { useRouter } from "next/navigation";
@@ -12,8 +14,9 @@ export default function useRegister() {
   const [password, setPassword] = useState<string>("");
   const [hashpassword, setHashPassword] = useState<string>("");
   const { hashString } = useHashValue();
-  const { createAccount } = useAccount();
-  const { createCustomer } = useCustomer();
+  const { web5, myDid } = useWeb5Instance() || {};
+  const { createAccount } = useAccount(web5);
+  const { createCustomer } = useCustomer(web5);
   const router = useRouter();
   const { myAccount } = useGetUserAccount();
 
@@ -45,7 +48,7 @@ export default function useRegister() {
 
     await createAccount(account);
     await createCustomer(data);
-    router.replace("/customer/login");
+    // router.replace("/customer/login");
   };
 
   return { formSteps, setFormSteps, password, setPassword, submit };

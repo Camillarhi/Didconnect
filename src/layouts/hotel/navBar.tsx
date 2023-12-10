@@ -1,12 +1,12 @@
 "use client";
 import BreadCrumbs from "@/components/breadCrumbs/breadCrumbs";
-import { useWeb5Connect } from "@/hooks";
+import useWeb5Instance from "@/hooks/useWeb5Instance";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function NavBar({ toggle }: { toggle: () => void }) {
-  const { web5 } = useWeb5Connect();
+  const { web5 } = useWeb5Instance() || {};
   const [myRecords, setMyRecords] = useState<any>(null);
   const router = useRouter();
 
@@ -21,7 +21,7 @@ export default function NavBar({ toggle }: { toggle: () => void }) {
         dataFormat: "application/json",
       },
     });
-    const readResult = await record.data.text();
+    const readResult = await record?.data.text();
     setMyRecords(readResult);
   };
 

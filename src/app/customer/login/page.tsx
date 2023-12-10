@@ -34,9 +34,10 @@ export default function Login() {
       alert("no account found");
     }
 
-    if (myAccount?.passkey !== hashpassword) {
+    if (myAccount?.passkey && myAccount?.passkey !== hashpassword) {
       alert("incorrect passcode");
-    } else {
+    }
+    if (myAccount?.passkey === hashpassword) {
       router.replace("/customer/home");
     }
   };

@@ -1,11 +1,7 @@
-import { DateSort } from "@/enums/dateSort.enum";
-import { useWeb5Connect } from "@/hooks";
 import { AccountType } from "@/types/account.type";
 import protocolDefinition from "../app/protocol/protocol.json";
 
-export default function useAccount() {
-  const { web5 } = useWeb5Connect();
-
+export default function useAccount(web5:any) {
   const getSingleAccount = async () => {
     let account: any;
     const { record } = await web5.dwn.records.read({
@@ -17,7 +13,7 @@ export default function useAccount() {
       },
     });
 
-    account = await record.data.json();
+    account = await record?.data.json();
     return account;
   };
 
@@ -33,8 +29,8 @@ export default function useAccount() {
         },
       });
 
-      const data = await record.data.json();
-      const createdAccount = { record, data, id: record.id };
+      const data = await record?.data.json();
+      const createdAccount = { record, data, id: record?.id };
 
       return createdAccount;
     } catch (e) {

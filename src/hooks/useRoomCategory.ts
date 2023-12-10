@@ -1,11 +1,8 @@
 import { DateSort } from "@/enums/dateSort.enum";
-import { useWeb5Connect } from "@/hooks";
 import { RoomCategoryType } from "@/types/roomCategory.type";
 import protocolDefinition from "../app/protocol/protocol.json";
 
-export default function useRoomCategory() {
-  const { web5 } = useWeb5Connect();
-
+export default function useRoomCategory(web5: any) {
   const getSingleRoomCategory = async (hotelId: string) => {
     let roomCategory: any;
     const { record } = await web5.dwn.records.read({
@@ -16,7 +13,7 @@ export default function useRoomCategory() {
       },
     });
 
-    roomCategory = await record.data.json();
+    roomCategory = await record?.data.json();
     return roomCategory;
   };
 
@@ -37,7 +34,7 @@ export default function useRoomCategory() {
       // add entry to sharedList
       if (records)
         for (let record of records) {
-          const data = await record.data.json();
+          const data = await record?.data.json();
           const list = { record, data, id: record.id };
           sharedList.push(list);
         }
@@ -57,7 +54,7 @@ export default function useRoomCategory() {
         },
       });
 
-      const data = await record.data.json();
+      const data = await record?.data.json();
       const createdRoomCategory = { record, data, id: record.id };
 
       return createdRoomCategory;

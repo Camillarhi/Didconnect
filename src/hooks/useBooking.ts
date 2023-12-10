@@ -1,11 +1,8 @@
 import { DateSort } from "@/enums/dateSort.enum";
-import { useWeb5Connect } from "@/hooks";
 import { BookingType } from "@/types/booking.type";
 import protocolDefinition from "../app/protocol/protocol.json";
 
-export default function useBooking() {
-  const { web5 } = useWeb5Connect();
-
+export default function useBooking(web5: any) {
   const getSingleBooking = async (hotelId: string) => {
     let booking: any;
     const { record } = await web5.dwn.records.read({
@@ -16,7 +13,7 @@ export default function useBooking() {
       },
     });
 
-    booking = await record.data.json();
+    booking = await record?.data.json();
     return booking;
   };
 
@@ -37,7 +34,7 @@ export default function useBooking() {
       // add entry to sharedList
       if (records)
         for (let record of records) {
-          const data = await record.data.json();
+          const data = await record?.data.json();
           const list = { record, data, id: record.id };
           sharedList.push(list);
         }
@@ -58,7 +55,7 @@ export default function useBooking() {
         },
       });
 
-      const data = await record.data.json();
+      const data = await record?.data.json();
       const createdBooking = { record, data, id: record.id };
 
       const { status: sendStatus } = await record.send(bookingData?.recipient);

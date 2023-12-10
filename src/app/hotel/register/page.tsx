@@ -4,11 +4,11 @@ import FileUpload from "@/components/fileUpload/fileUpload";
 import InputGroup from "@/components/input/inputGroup";
 import Passcode from "@/components/passcode/passcode";
 import RegisterTabGuide from "@/components/registerGuideTab/registerTabGuide";
-import { useWeb5Connect } from "@/hooks";
 import useAccount from "@/hooks/useAccount";
 import useGetUserAccount from "@/hooks/useGetUserAccount";
 import useHashValue from "@/hooks/useHashValue";
 import useHotel from "@/hooks/useHotel";
+import useWeb5Instance from "@/hooks/useWeb5Instance";
 import { AccountType } from "@/types/account.type";
 import { HotelType, HotelTypeInitialValues } from "@/types/hotel.type";
 import Image from "next/image";
@@ -30,15 +30,13 @@ export default function RegisterHotel() {
   const [password, setPassword] = useState<string>("");
   const [hashpassword, setHashPassword] = useState<string>("");
   const { hashString } = useHashValue();
-  const { createAccount } = useAccount();
-  const { createHotel } = useHotel();
-  const { myDid } = useWeb5Connect();
+  const { myDid, web5 } = useWeb5Instance() || {};
+  const { createHotel } = useHotel(web5);
+  const { createAccount } = useAccount(web5);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const [imageBlobs, setImageBlobs] = useState<Blob[]>([]);
   const { myAccount } = useGetUserAccount();
   const router = useRouter();
-
-  console.log({myAccount})
 
   useEffect(() => {
     if (formSteps === 2) {
@@ -98,7 +96,7 @@ export default function RegisterHotel() {
 
     await createAccount(account);
     await createHotel(data);
-    router.replace("/hotel");
+    // router.replace("/hotel");
   };
 
   return (

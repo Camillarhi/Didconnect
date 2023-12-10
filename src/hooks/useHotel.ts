@@ -1,11 +1,8 @@
-import { useWeb5Connect } from "@/hooks";
+import { DateSort } from "@/enums/dateSort.enum";
 import { HotelType } from "@/types/hotel.type";
 import protocolDefinition from "../app/protocol/protocol.json";
-import { DateSort } from "@/enums/dateSort.enum";
 
-export default function useHotel() {
-  const { web5 } = useWeb5Connect();
-
+export default function useHotel(web5: any) {
   const getSingleHotel = async (hotelId: string) => {
     let hotel: any;
     const { record } = await web5.dwn.records.read({
@@ -16,7 +13,7 @@ export default function useHotel() {
       },
     });
 
-    hotel = await record.data.json();
+    hotel = await record?.data.json();
     return hotel;
   };
 
@@ -37,7 +34,7 @@ export default function useHotel() {
       // add entry to sharedList
       if (records)
         for (let record of records) {
-          const data = await record.data.json();
+          const data = await record?.data.json();
           const list = { record, data, id: record.id };
           sharedList.push(list);
         }
@@ -58,7 +55,7 @@ export default function useHotel() {
         },
       });
 
-      const data = await record.data.json();
+      const data = await record?.data.json();
       const createdHotel = { record, data, id: record.id };
 
       return createdHotel;

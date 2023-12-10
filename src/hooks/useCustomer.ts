@@ -1,11 +1,8 @@
 import { DateSort } from "@/enums/dateSort.enum";
-import { useWeb5Connect } from "@/hooks";
 import { CustomerType } from "@/types/customer.type";
 import protocolDefinition from "../app/protocol/protocol.json";
 
-export default function useCustomer() {
-  const { web5 } = useWeb5Connect();
-
+export default function useCustomer(web5: any) {
   const getSingleCustomer = async (customerId: string) => {
     let customer: any;
     const { record } = await web5.dwn.records.read({
@@ -16,7 +13,7 @@ export default function useCustomer() {
       },
     });
 
-    customer = await record.data.json();
+    customer = await record?.data.json();
     return customer;
   };
 
@@ -31,7 +28,7 @@ export default function useCustomer() {
       },
     });
 
-    customer = await record.data.json();
+    customer = await record?.data.json();
     return customer;
   };
 
@@ -52,7 +49,7 @@ export default function useCustomer() {
       // add entry to sharedList
       if (records)
         for (let record of records) {
-          const data = await record.data.json();
+          const data = await record?.data.json();
           const list = { record, data, id: record.id };
           sharedList.push(list);
         }
@@ -66,13 +63,13 @@ export default function useCustomer() {
         data: customerData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: 'customer',
+          protocolPath: "customer",
           schema: protocolDefinition.types.customer.schema,
           dataFormat: protocolDefinition.types.customer.dataFormats[0],
         },
       });
 
-      const data = await record.data.json();
+      const data = await record?.data.json();
       const createdCustomer = { record, data, id: record.id };
 
       return createdCustomer;
