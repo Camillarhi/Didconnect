@@ -14,7 +14,7 @@ export default function useRegister() {
   const [password, setPassword] = useState<string>("");
   const [hashpassword, setHashPassword] = useState<string>("");
   const { hashString } = useHashValue();
-  const { web5, myDid } = useWeb5Instance() || {};
+  const { web5 } = useWeb5Instance() || {};
   const { createAccount } = useAccount(web5);
   const { createCustomer } = useCustomer(web5);
   const router = useRouter();

@@ -21,6 +21,5 @@ export default function useGetUserAccount() {
     setMyAccount(readResult);
   };
 
-  console.log({ myAccount }, { myDid }, { web5 });
   return { myAccount };
 }
