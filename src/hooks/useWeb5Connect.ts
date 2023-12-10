@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import protocolDefinition from "../app/protocol/protocol.json";
+import { webcrypto } from "node:crypto";
+
+// @ts-ignore
+if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 export default function useWeb5Connect() {
   const [web5, setWeb5] = useState<any>(null);

@@ -1,8 +1,11 @@
 import { DateSort } from "@/enums/dateSort.enum";
 import { HotelType } from "@/types/hotel.type";
 import protocolDefinition from "../app/protocol/protocol.json";
+import { useRouter } from "next/navigation";
 
 export default function useHotel(web5: any) {
+  const router = useRouter();
+
   const getSingleHotel = async (hotelId: string) => {
     let hotel: any;
     const { record } = await web5.dwn.records.read({
@@ -57,6 +60,7 @@ export default function useHotel(web5: any) {
 
       const data = await record?.data.json();
       const createdHotel = { record, data, id: record.id };
+      router.replace("/hotel");
 
       return createdHotel;
     } catch (e) {

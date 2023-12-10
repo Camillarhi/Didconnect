@@ -3,9 +3,8 @@
 import AlertModal from "@/components/modals/alertModal";
 import { useDisclosure } from "@/hooks";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Index() {
   const {
@@ -21,6 +20,19 @@ export default function Index() {
   const [accountValue, setAccountValue] = useState<"hotel" | "guest">("guest");
   const [link, setLink] = useState<string>("");
   const router = useRouter();
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("./service-worker.js", { scope: "/" })
+        .then(function (registration) {
+          console.log("service worker registered", registration.scope);
+        });
+      navigator.serviceWorker.ready.then(function (registration) {
+        console.log("service worker is ready", registration.scope);
+      });
+    }
+  }, []);
 
   const proceedToNextPage = () => {
     if (link === "" || !link) {
@@ -128,7 +140,8 @@ export default function Index() {
           </div>
         </div>
         <div className="self-stretch h-[5.625rem] flex-col justify-start items-center gap-2.5 flex md:mt-10">
-          <div
+          <button
+            type="button"
             onClick={() => {
               setLink(
                 accountValue === "hotel"
@@ -144,8 +157,9 @@ export default function Index() {
             <div className="text-center text-white text-sm font-medium capitalize leading-tight">
               Create your wallet
             </div>
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             onClick={() => {
               setLink(
                 accountValue === "guest" ? "/customer/login" : "/hotel/login"
@@ -159,7 +173,7 @@ export default function Index() {
             <div className="text-center text-violet-300 text-sm font-medium capitalize leading-tight">
               I already have a wallet
             </div>
-          </div>
+          </button>
         </div>
       </div>
 

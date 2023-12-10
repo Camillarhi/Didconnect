@@ -92,11 +92,8 @@ export default function RegisterHotel() {
     data.author = myDid;
     data.image = imageBlobs;
 
-    console.log({ data }, { account }, { imageBlobs });
-
     await createAccount(account);
     await createHotel(data);
-    // router.replace("/hotel");
   };
 
   return (

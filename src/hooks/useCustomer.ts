@@ -1,8 +1,10 @@
 import { DateSort } from "@/enums/dateSort.enum";
 import { CustomerType } from "@/types/customer.type";
 import protocolDefinition from "../app/protocol/protocol.json";
+import { useRouter } from "next/navigation";
 
 export default function useCustomer(web5: any) {
+  const router = useRouter();
   const getSingleCustomer = async (customerId: string) => {
     let customer: any;
     const { record } = await web5.dwn.records.read({
@@ -71,6 +73,7 @@ export default function useCustomer(web5: any) {
 
       const data = await record?.data.json();
       const createdCustomer = { record, data, id: record.id };
+      router.replace("/customer/login");
 
       return createdCustomer;
     } catch (e) {

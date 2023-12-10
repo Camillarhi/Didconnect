@@ -2,13 +2,12 @@
 import InputGroup from "@/components/input/inputGroup";
 import Passcode from "@/components/passcode/passcode";
 import RegisterTabGuide from "@/components/registerGuideTab/registerTabGuide";
-import useRegister from "./useRegister";
-import formSteps from "@/components/formSteps/formSteps";
 import {
   CustomerType,
   CustomerTypeInitialFormValues,
 } from "@/types/customer.type";
 import { useForm } from "react-hook-form";
+import useRegister from "./useRegister";
 
 export default function RegisterGuest() {
   const {
@@ -19,7 +18,7 @@ export default function RegisterGuest() {
     mode: "all",
     defaultValues: CustomerTypeInitialFormValues,
   });
-  
+
   const { formSteps, setFormSteps, password, setPassword, submit } =
     useRegister();
 
