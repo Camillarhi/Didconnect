@@ -1,7 +1,7 @@
 import { DateSort } from "@/enums/dateSort.enum";
 import { useWeb5Connect } from "@/hooks";
 import { BookingType } from "@/types/booking.type";
-import protocolDefinition from "../../protocol/protocol.json";
+import protocolDefinition from "../app/protocol/protocol.json";
 
 export default function useBooking() {
   const { web5 } = useWeb5Connect();
@@ -23,7 +23,7 @@ export default function useBooking() {
   const getAllBookings = async () => {
     let sharedList = [];
     if (web5) {
-      const { records } = await web5?.dwn?.records.query({
+      const { records } = await web5.dwn?.records.query({
         message: {
           filter: {
             schema: protocolDefinition.types.booking.schema,

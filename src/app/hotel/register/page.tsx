@@ -3,13 +3,57 @@ import CategoryImages from "@/components/categoryImage/categoryImages";
 import InputGroup from "@/components/input/inputGroup";
 import Passcode from "@/components/passcode/passcode";
 import RegisterTabGuide from "@/components/registerGuideTab/registerTabGuide";
+import { useWeb5Connect } from "@/hooks";
+import useAccount from "@/hooks/useAccount";
+import useHashValue from "@/hooks/useHashValue";
+import useHotel from "@/hooks/useHotel";
+import { AccountType } from "@/types/account.type";
+import { HotelType, HotelTypeInitialValues } from "@/types/hotel.type";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function RegisterHotel() {
-  const [formSteps, setFormSteps] = useState<number>(3);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<HotelType>({
+    mode: "all",
+    defaultValues: HotelTypeInitialValues,
+  });
+
+  const [formSteps, setFormSteps] = useState<number>(1);
   const [password, setPassword] = useState<string>("");
+  const [hashpassword, setHashPassword] = useState<string>("");
+  const { hashString } = useHashValue();
+  const { createAccount } = useAccount();
+  const { createHotel } = useHotel();
+  const { web5, myDid } = useWeb5Connect();
+
+  useEffect(() => {
+    if (formSteps === 2) {
+      hashString(password).then((hash) => {
+        setHashPassword(hash);
+      });
+    }
+  }, [formSteps]);
+
+  const submit = async (data: HotelType) => {
+    const account: AccountType = {
+      passkey: hashpassword,
+      accountType: "hotelOwner",
+      "@type": "account",
+    };
+
+    data.author = myDid;
+
+    console.log({ data }, { account });
+
+    // await createAccount(account);
+    // await createHotel(data);
+  };
 
   return (
     <div className="bg-[#151628] text-white px-4 py-6 h-full max-h-full max-w-full overflow-y-auto w-full">
@@ -32,7 +76,7 @@ export default function RegisterHotel() {
 
       {formSteps === 2 && (
         <div className="md:flex md:justify-center md:items-center w-full md:mt-[3.5rem] md:flex-col">
-          <div className=" md:w-[38.75rem] md:h-[23rem] md:border border-[#272849] md:shadow md:rounded-lg md:pt-6 md:pb-8 md:px-6">
+          <div className=" md:w-[38.75rem] md:h-fit md:border border-[#272849] md:shadow md:rounded-lg md:pt-6 md:pb-8 md:px-6">
             <RegisterTabGuide
               title="Set Up Your Profile"
               description="You have exclusive ownership of your data, and you alone have the right to decide when and how to share it"
@@ -42,42 +86,68 @@ export default function RegisterHotel() {
                 label="Business Name"
                 type="text"
                 className="h-9 "
-                placeHolder="Jordan Peters"
-                props={{}}
+                placeHolder="business name"
+                props={{
+                  ...register("businessName", {
+                    required: "*Please enter your business name",
+                  }),
+                }}
               />
-
+              {errors.businessName?.message && (
+                <p className=" text-[red] text-sm">
+                  {errors.businessName?.message}
+                </p>
+              )}
               <InputGroup
                 label="Business email address"
                 type="email"
                 className="h-9 "
-                placeHolder="Jordan@Peters.com"
-                props={{}}
+                placeHolder="email"
+                props={{
+                  ...register("email", {
+                    required: "*Please enter your business email address",
+                  }),
+                }}
               />
-
+              {errors.email?.message && (
+                <p className=" text-[red] text-sm">{errors.email?.message}</p>
+              )}
               <InputGroup
                 label="Phone number"
                 type="text"
                 className="h-9 "
                 placeHolder="+234947993"
-                props={{}}
+                props={{
+                  ...register("phoneNumber", {
+                    required:
+                      "*Please enter your business contact phone number",
+                  }),
+                }}
               />
+              {errors.phoneNumber?.message && (
+                <p className=" text-[red] text-sm">
+                  {errors.phoneNumber?.message}
+                </p>
+              )}
             </div>
           </div>
           <div className=" mt-8 flex md:w-[38.75rem] justify-end">
-            <div
-              className="px-6 py-2.5 bg-primary rounded-full flex-col justify-center items-center gap-2.5 flex cursor-pointer"
+            <button
+              type="button"
+              disabled={!isValid}
+              className={`px-6 py-2.5 ${
+                isValid ? "bg-primary" : "bg-[#272849]"
+              } rounded-full flex-col justify-center items-center gap-2.5 flex cursor-pointer text-center text-white text-sm font-medium capitalize leading-tight`}
               onClick={() => setFormSteps(3)}
             >
-              <div className="text-center text-white text-sm font-medium capitalize leading-tight">
-                Next
-              </div>
-            </div>
+              Next
+            </button>
           </div>
         </div>
       )}
       {formSteps === 3 && (
         <div className="md:flex md:justify-center md:items-center w-full md:mt-[3.5rem] md:flex-col">
-          <div className="md:w-[27rem] md:h-[30.375rem] px-4 pt-4 pb-6 md:rounded-lg md:shadow md:border border-[#272849] md:flex-col justify-start items-center gap-6 md:inline-flex">
+          <div className="md:w-[27rem] md:h-fit px-4 pt-4 pb-6 md:rounded-lg md:shadow md:border border-[#272849] md:flex-col justify-start items-center gap-6 md:inline-flex">
             <div className="self-stretch h-14 flex-col justify-start items-start gap-2 flex">
               <div className="self-stretch text-white text-xs font-semibold uppercase leading-none">
                 Media
@@ -120,13 +190,18 @@ export default function RegisterHotel() {
                 </div>
                 <textarea
                   placeholder="Enter a detailed description"
-                  defaultValue="Aston Hotel, Alice Springs NT 0870, Australia is a modern
-                    hotel. elegant 5 star hotel overlooking the sea. perfect for
-                    a romantic, charming"
                   className="self-stretch grow shrink basis-0 px-3 py-2 focus:outline-none bg-gray-900 rounded border border-slate-600 flex-col justify-start items-start gap-2.5 flex"
+                  {...register("description", {
+                    required: "*Please enter a description",
+                  })}
                 ></textarea>
               </div>
-              <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
+              {errors.description?.message && (
+                <p className=" text-[red] text-sm">
+                  {errors.description?.message}
+                </p>
+              )}
+              {/* <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
                 <div className="text-white text-sm font-normal leading-tight">
                   Facilities
                 </div>
@@ -150,7 +225,7 @@ export default function RegisterHotel() {
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -163,14 +238,14 @@ export default function RegisterHotel() {
                 Back
               </div>
             </div>
-            <Link
-              href={"/hotel"}
+            <div
+              onClick={handleSubmit(submit)}
               className="px-6 py-2.5 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 inline-flex cursor-pointer"
             >
               <div className="text-center text-white text-sm font-medium capitalize leading-tight">
                 Finish
               </div>
-            </Link>
+            </div>
           </div>
         </div>
       )}

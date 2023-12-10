@@ -17,14 +17,5 @@ export default function useHashValue() {
     return hashHex;
   }
 
-  // Example usage
-  const inputValue = "Hello, World!";
-  hashString(inputValue).then((hash) => {
-    console.log(`Input: ${inputValue}`);
-    console.log(`Hash: ${hash}`);
-    console.log(
-      "dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f"
-    );
-  });
   return { hashString };
 }

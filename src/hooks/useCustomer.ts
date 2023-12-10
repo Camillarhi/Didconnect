@@ -1,17 +1,32 @@
 import { DateSort } from "@/enums/dateSort.enum";
 import { useWeb5Connect } from "@/hooks";
 import { CustomerType } from "@/types/customer.type";
-import protocolDefinition from "../../protocol/protocol.json";
+import protocolDefinition from "../app/protocol/protocol.json";
 
 export default function useCustomer() {
   const { web5 } = useWeb5Connect();
 
-  const getSingleCustomer = async (hotelId: string) => {
+  const getSingleCustomer = async (customerId: string) => {
     let customer: any;
     const { record } = await web5.dwn.records.read({
       message: {
         filter: {
-          recordId: hotelId,
+          recordId: customerId,
+        },
+      },
+    });
+
+    customer = await record.data.json();
+    return customer;
+  };
+
+  const getCustomerForLoggedInUser = async () => {
+    let customer: any;
+    const { record } = await web5.dwn.records.read({
+      message: {
+        filter: {
+          protocol: protocolDefinition.protocol,
+          protocolPath: "customer",
         },
       },
     });
@@ -23,7 +38,7 @@ export default function useCustomer() {
   const getAllCustomers = async () => {
     let sharedList = [];
     if (web5) {
-      const { records } = await web5?.dwn?.records.query({
+      const { records } = await web5.dwn?.records.query({
         message: {
           filter: {
             schema: protocolDefinition.types.customer.schema,
@@ -95,7 +110,7 @@ export default function useCustomer() {
         },
       });
       console.log(
-        `deleted ${customerData?.firstName} ${customerData?.lastName}. status: ${response.status.code}`
+        `deleted ${customerData?.name}. status: ${response.status.code}`
       );
     } catch (e) {
       console.error(e);
@@ -109,5 +124,6 @@ export default function useCustomer() {
     getAllCustomers,
     createCustomer,
     deleteCustomerData,
+    getCustomerForLoggedInUser,
   };
 }

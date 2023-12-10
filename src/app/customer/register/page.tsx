@@ -2,35 +2,26 @@
 import InputGroup from "@/components/input/inputGroup";
 import Passcode from "@/components/passcode/passcode";
 import RegisterTabGuide from "@/components/registerGuideTab/registerTabGuide";
+import useRegister from "./useRegister";
+import formSteps from "@/components/formSteps/formSteps";
 import {
   CustomerType,
   CustomerTypeInitialFormValues,
 } from "@/types/customer.type";
-import Link from "next/link";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function RegisterGuest() {
-  const [formSteps, setFormSteps] = useState<number>(2);
-  const [password, setPassword] = useState<string>("");
   const {
     register,
-    unregister,
-    getValues,
-    setValue,
     handleSubmit,
-    resetField,
-    watch,
-    trigger,
     formState: { errors, isValid },
   } = useForm<CustomerType>({
     mode: "all",
     defaultValues: CustomerTypeInitialFormValues,
   });
-
-  const submit = (data: CustomerType) => {
-    console.log({ data });
-  };
+  
+  const { formSteps, setFormSteps, password, setPassword, submit } =
+    useRegister();
 
   return (
     <div className="bg-[#151628] text-white px-4 py-6 h-[100vh] max-h-full max-w-full overflow-y-auto w-full flex flex-col">

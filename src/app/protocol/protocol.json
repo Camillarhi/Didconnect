@@ -2,6 +2,10 @@
   "protocol": "https://didconnect.org/did-connect",
   "published": true,
   "types": {
+    "account": {
+      "schema": "https://didconnect.org/did-connect/schemas/account.json",
+      "dataFormats": ["application/json"]
+    },
     "hotel": {
       "schema": "https://didconnect.org/did-connect/schemas/hotel.json",
       "dataFormats": ["application/json"]
@@ -28,6 +32,19 @@
     }
   },
   "structure": {
+    "account": {
+      "$actions": [
+        {
+          "who": "author",
+          "of": "account",
+          "can": "read"
+        },
+        {
+          "who": "anyone",
+          "can": "write"
+        }
+      ]
+    },
     "hotel": {
       "$actions": [
         {

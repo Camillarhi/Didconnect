@@ -4,6 +4,7 @@ import AlertModal from "@/components/modals/alertModal";
 import { useDisclosure } from "@/hooks";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Index() {
@@ -18,6 +19,16 @@ export default function Index() {
     close: closeHotelGuestAlertModal,
   } = useDisclosure();
   const [accountValue, setAccountValue] = useState<"hotel" | "guest">("guest");
+  const [link, setLink] = useState<string>("");
+  const router = useRouter();
+
+  const proceedToNextPage = () => {
+    if (link === "" || !link) {
+      alert("please select an account type");
+      return;
+    }
+    router.replace(link);
+  };
 
   return (
     <div className="w-full h-[100vh] px-4 pt-6 pb-10 flex-col items-center inline-flex">
@@ -44,7 +55,6 @@ export default function Index() {
               <label
                 onClick={() => {
                   setAccountValue(() => "guest");
-                  openHotelGuestAlertModal();
                 }}
                 htmlFor="guest"
                 className="self-stretch p-4 rounded border border-[#272849] justify-between items-start inline-flex"
@@ -70,6 +80,7 @@ export default function Index() {
                 <div className="w-5 h-5 relative">
                   <input
                     name="account-type"
+                    defaultChecked
                     value={"guest"}
                     id="guest"
                     type="radio"
@@ -80,7 +91,6 @@ export default function Index() {
               <label
                 onClick={() => {
                   setAccountValue(() => "hotel");
-                  openHotelAlertModal();
                 }}
                 htmlFor="hotel"
                 className="self-stretch p-4 rounded border border-[#272849] justify-between items-start inline-flex"
@@ -96,7 +106,7 @@ export default function Index() {
                   </div>
                   <div className="grow shrink basis-0 flex-col justify-start items-start gap-1 inline-flex">
                     <div className="text-white text-base font-semibold leading-normal">
-                      Hotel
+                      Hotel Owner
                     </div>
                     <div className="self-stretch text-zinc-300 text-xs font-normal leading-none">
                       Create your admin account to give your customers a more
@@ -118,28 +128,38 @@ export default function Index() {
           </div>
         </div>
         <div className="self-stretch h-[5.625rem] flex-col justify-start items-center gap-2.5 flex md:mt-10">
-          <Link
-            href={`${
+          <div
+            onClick={() => {
+              setLink(
+                accountValue === "hotel"
+                  ? "/hotel/register"
+                  : "/customer/register"
+              );
               accountValue === "hotel"
-                ? "/hotel/register"
-                : "/customer/register"
-            }`}
+                ? openHotelAlertModal()
+                : openHotelGuestAlertModal();
+            }}
             className="self-stretch h-10 px-6 py-2.5 bg-primary rounded-full flex-col justify-center items-center gap-2.5 flex"
           >
             <div className="text-center text-white text-sm font-medium capitalize leading-tight">
               Create your wallet
             </div>
-          </Link>
-          <Link
-            href={`${
-              accountValue === "guest" ? "/customer/login" : "/hotel/login"
-            }`}
+          </div>
+          <div
+            onClick={() => {
+              setLink(
+                accountValue === "guest" ? "/customer/login" : "/hotel/login"
+              );
+              accountValue === "hotel"
+                ? openHotelAlertModal()
+                : openHotelGuestAlertModal();
+            }}
             className="self-stretch h-10 px-3 py-2.5 rounded-full flex-col justify-center items-center gap-2 flex"
           >
             <div className="text-center text-violet-300 text-sm font-medium capitalize leading-tight">
               I already have a wallet
             </div>
-          </Link>
+          </div>
         </div>
       </div>
 
@@ -147,13 +167,19 @@ export default function Index() {
         title="Please switch to Desktop"
         description="This app is more accessible on desktop devices for Hotel Owners. Kindly switch or proceed as a Hotel Guest"
         isOpen={isHotelAlertModalOpen}
-        close={closeHotelAlertModal}
+        close={() => {
+          closeHotelAlertModal();
+          proceedToNextPage();
+        }}
       />
       <AlertModal
         title="Please switch to Mobile"
         description="This app is more accessible on mobile devices for Hotel Guests. Kindly switch or proceed as a Hotel Owner"
         isOpen={isHotelGuestAlertModalOpen}
-        close={closeHotelGuestAlertModal}
+        close={() => {
+          closeHotelGuestAlertModal();
+          proceedToNextPage();
+        }}
       />
     </div>
   );

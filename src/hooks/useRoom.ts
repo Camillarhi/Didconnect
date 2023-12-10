@@ -1,13 +1,13 @@
-import { useWeb5Connect } from "@/hooks";
-import { HotelType } from "@/types/hotel.type";
-import protocolDefinition from "../../protocol/protocol.json";
 import { DateSort } from "@/enums/dateSort.enum";
+import { useWeb5Connect } from "@/hooks";
+import { RoomType } from "@/types/room.type";
+import protocolDefinition from "../app/protocol/protocol.json";
 
-export default function useHotel() {
+export default function useRoom() {
   const { web5 } = useWeb5Connect();
 
-  const getSingleHotel = async (hotelId: string) => {
-    let hotel: any;
+  const getSingleRoom = async (hotelId: string) => {
+    let room: any;
     const { record } = await web5.dwn.records.read({
       message: {
         filter: {
@@ -16,17 +16,17 @@ export default function useHotel() {
       },
     });
 
-    hotel = await record.data.json();
-    return hotel;
+    room = await record.data.json();
+    return room;
   };
 
-  const getAllHotels = async () => {
+  const getAllRooms = async () => {
     let sharedList = [];
     if (web5) {
-      const { records } = await web5?.dwn?.records.query({
+      const { records } = await web5.dwn?.records.query({
         message: {
           filter: {
-            schema: protocolDefinition.types.hotel.schema,
+            schema: protocolDefinition.types.room.schema,
           },
           dateSort: DateSort.CreatedAscending,
         },
@@ -45,58 +45,57 @@ export default function useHotel() {
     return sharedList;
   };
 
-  const createHotel = async (hotelData: HotelType) => {
+  const createRoom = async (roomData: RoomType) => {
     try {
       const { record } = await web5.dwn.records.create({
-        data: hotelData,
+        data: roomData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: hotelData?.["@type"],
-          schema: protocolDefinition.types.hotel.schema,
-          dataFormat: protocolDefinition.types.hotel.dataFormats[0],
-          published: true,
+          protocolPath: roomData?.["@type"],
+          schema: protocolDefinition.types.room.schema,
+          dataFormat: protocolDefinition.types.room.dataFormats[0],
         },
       });
 
       const data = await record.data.json();
-      const createdHotel = { record, data, id: record.id };
+      const createdRoom = { record, data, id: record.id };
 
-      return createdHotel;
+      return createdRoom;
     } catch (e) {
       console.error(e);
       return;
     }
   };
 
-  const editHotelData = async (hotelData: HotelType) => {
+  const editRoomData = async (roomData: RoomType) => {
     try {
       // Get record in DWN
       const { record } = await web5.dwn.records.read({
         message: {
           filter: {
-            recordId: hotelData.id,
+            recordId: roomData.id,
           },
         },
       });
 
       // Update the record in DWN
-      await record.update({ data: hotelData });
+      await record.update({ data: roomData });
     } catch (e) {
       console.error(e);
       return;
     }
   };
 
-  const deleteHotelData = async (hotelData: HotelType) => {
+  const deleteRoomData = async (roomData: RoomType) => {
     try {
       // Get record in DWN
       let response = await web5.dwn.records.delete({
         message: {
-          recordId: hotelData?.id,
+          recordId: roomData?.id,
         },
       });
       console.log(
-        `deleted ${hotelData?.name}. status: ${response.status.code}`
+        `deleted ${roomData?.roomNumber}. status: ${response.status.code}`
       );
     } catch (e) {
       console.error(e);
@@ -105,10 +104,10 @@ export default function useHotel() {
   };
 
   return {
-    getSingleHotel,
-    editHotelData,
-    getAllHotels,
-    createHotel,
-    deleteHotelData,
+    getSingleRoom,
+    editRoomData,
+    getAllRooms,
+    createRoom,
+    deleteRoomData,
   };
 }
