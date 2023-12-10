@@ -11,5 +11,4 @@ export type RoomType = {
   author: string;
   price: number;
   permittedUsers?: RoomAccessType[];
-  "@type": "room";
 };

@@ -45,6 +45,7 @@ export default function useRegister() {
 
     await createAccount(account);
     await createCustomer(data);
+    router.replace("/customer/login");
   };
 
   return { formSteps, setFormSteps, password, setPassword, submit };

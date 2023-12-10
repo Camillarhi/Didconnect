@@ -27,7 +27,7 @@ export default function useAccount() {
         data: accountData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: accountData?.["@type"],
+          protocolPath: "account",
           schema: protocolDefinition.types.account.schema,
           dataFormat: protocolDefinition.types.account.dataFormats[0],
         },

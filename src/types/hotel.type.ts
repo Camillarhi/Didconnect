@@ -12,7 +12,6 @@ export type HotelType = {
   image?: any[];
   roomCategory?: RoomCategoryType[];
   room?: RoomType[];
-  "@type": "hotel";
 };
 
 export const HotelTypeInitialValues = {

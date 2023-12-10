@@ -10,7 +10,6 @@ export type BookingType = {
   roomId: string;
   roomCategoryName: string;
   roomNo: string;
-  "@type": "booking";
   name?: string;
   email?: string;
   phoneNumber?: string;

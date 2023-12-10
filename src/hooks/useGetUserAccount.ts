@@ -11,6 +11,7 @@ export default function useGetUserAccount() {
 
   useEffect(() => {
     if (web5) {
+        console.log({web5})
       getRecords();
     }
   }, [web5]);

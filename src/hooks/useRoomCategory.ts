@@ -51,7 +51,7 @@ export default function useRoomCategory() {
         data: roomCategoryData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: roomCategoryData?.["@type"],
+          protocolPath: "roomcategory",
           schema: protocolDefinition.types.roomcategory.schema,
           dataFormat: protocolDefinition.types.roomcategory.dataFormats[0],
         },

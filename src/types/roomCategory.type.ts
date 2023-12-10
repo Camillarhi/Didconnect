@@ -4,5 +4,4 @@ export type RoomCategoryType = {
   name: string;
   description: string;
   price: number;
-  "@type": "roomcategory";
 };

@@ -51,7 +51,7 @@ export default function useBooking() {
         data: bookingData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: bookingData?.["@type"],
+          protocolPath: "booking",
           schema: protocolDefinition.types.booking.schema,
           dataFormat: protocolDefinition.types.booking.dataFormats[0],
           recipient: bookingData?.recipient,

@@ -1,17 +1,19 @@
 "use client";
 import CategoryImages from "@/components/categoryImage/categoryImages";
+import FileUpload from "@/components/fileUpload/fileUpload";
 import InputGroup from "@/components/input/inputGroup";
 import Passcode from "@/components/passcode/passcode";
 import RegisterTabGuide from "@/components/registerGuideTab/registerTabGuide";
 import { useWeb5Connect } from "@/hooks";
 import useAccount from "@/hooks/useAccount";
+import useGetUserAccount from "@/hooks/useGetUserAccount";
 import useHashValue from "@/hooks/useHashValue";
 import useHotel from "@/hooks/useHotel";
 import { AccountType } from "@/types/account.type";
 import { HotelType, HotelTypeInitialValues } from "@/types/hotel.type";
 import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function RegisterHotel() {
@@ -30,7 +32,13 @@ export default function RegisterHotel() {
   const { hashString } = useHashValue();
   const { createAccount } = useAccount();
   const { createHotel } = useHotel();
-  const { web5, myDid } = useWeb5Connect();
+  const { myDid } = useWeb5Connect();
+  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const [imageBlobs, setImageBlobs] = useState<Blob[]>([]);
+  const { myAccount } = useGetUserAccount();
+  const router = useRouter();
+
+  console.log({myAccount})
 
   useEffect(() => {
     if (formSteps === 2) {
@@ -40,6 +48,42 @@ export default function RegisterHotel() {
     }
   }, [formSteps]);
 
+  useEffect(() => {
+    if (myAccount?.accountType === "guest") {
+      router.replace("/customer/login");
+      return;
+    }
+    if (myAccount?.accountType === "hotelOwner") {
+      router.replace("/hotel/login");
+      return;
+    }
+  }, [myAccount]);
+
+  const handleFilesSelect = (files: FileList | null) => {
+    setSelectedFiles(files);
+    if (files) {
+      const blobs: Blob[] = Array.from(files).map(
+        (file) => new Blob([file], { type: file.type })
+      );
+      setImageBlobs(blobs);
+    }
+  };
+
+  const removeFile = (index: number) => {
+    if (selectedFiles) {
+      const filesArray = Array.from(selectedFiles);
+      filesArray.splice(index, 1);
+
+      // Convert the array of File objects back to a new FileList
+      const updatedFileList = new DataTransfer();
+      filesArray.forEach((file) => {
+        updatedFileList.items.add(file);
+      });
+
+      setSelectedFiles(updatedFileList.files);
+    }
+  };
+
   const submit = async (data: HotelType) => {
     const account: AccountType = {
       passkey: hashpassword,
@@ -48,11 +92,13 @@ export default function RegisterHotel() {
     };
 
     data.author = myDid;
+    data.image = imageBlobs;
 
-    console.log({ data }, { account });
+    console.log({ data }, { account }, { imageBlobs });
 
-    // await createAccount(account);
-    // await createHotel(data);
+    await createAccount(account);
+    await createHotel(data);
+    router.replace("/hotel");
   };
 
   return (
@@ -158,31 +204,28 @@ export default function RegisterHotel() {
               </div>
             </div>
             <div className="self-stretch h-[22.875rem] flex-col justify-start items-center gap-4 flex">
-              <div className="self-stretch h-[9.75rem] pb-4 bg-gray-900 shadow-inner flex-col justify-start items-start gap-2 flex border-b border-[#272849]">
-                <div className="justify-start items-start gap-2 inline-flex">
-                  <CategoryImages />
-                  <CategoryImages />
+              <div className="self-stretch h-fit pb-4 bg-gray-900 shadow-inner flex-col justify-start items-start gap-2 flex border-b border-[#272849]">
+                <div className="justify-start items-start gap-2 inline-flex w-full flex-wrap">
+                  {selectedFiles &&
+                    Array.from(selectedFiles).map((file, index) => (
+                      <div className=" relative">
+                        <Image
+                          alt=""
+                          src={"/assets/svgs/close.svg"}
+                          height={24}
+                          width={24}
+                          className=" rounded-md absolute z-40 top-0 right-0"
+                          onClick={() => removeFile(index)}
+                        />
+
+                        <CategoryImages
+                          key={index}
+                          src={URL.createObjectURL(file)}
+                        />
+                      </div>
+                    ))}
                 </div>
-                <div
-                  onClick={() =>
-                    document.getElementById("upload-hotel-images")?.click()
-                  }
-                  className=" cursor-pointer w-[3.9375rem] h-11 pl-[1.375rem] pr-[1.3125rem] py-3 bg-gray-900 rounded-lg border border-slate-600 justify-center items-center inline-flex border-dashed"
-                >
-                  <Image
-                    alt=""
-                    src={"/assets/svgs/upload.svg"}
-                    height={20}
-                    width={20}
-                  />
-                  <input
-                    type="file"
-                    id="upload-hotel-images"
-                    multiple
-                    className=" hidden"
-                    accept="image/png, image/gif, image/jpeg"
-                  />
-                </div>
+                <FileUpload onFilesSelect={handleFilesSelect} />
               </div>
               <div className="self-stretch h-[7.375rem] flex-col justify-start items-start gap-1 flex">
                 <div className="self-stretch text-white text-sm font-normal leading-tight">
@@ -238,14 +281,16 @@ export default function RegisterHotel() {
                 Back
               </div>
             </div>
-            <div
+            <button
+              type="button"
+              disabled={!isValid}
               onClick={handleSubmit(submit)}
-              className="px-6 py-2.5 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 inline-flex cursor-pointer"
+              className={`px-6 py-2.5  ${
+                isValid ? "bg-primary" : "bg-[#272849]"
+              } rounded-full flex-col text-center text-white text-sm font-medium capitalize leading-tight justify-center items-center gap-2.5 inline-flex cursor-pointer`}
             >
-              <div className="text-center text-white text-sm font-medium capitalize leading-tight">
-                Finish
-              </div>
-            </div>
+              Finish
+            </button>
           </div>
         </div>
       )}

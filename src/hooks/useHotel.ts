@@ -51,7 +51,7 @@ export default function useHotel() {
         data: hotelData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: hotelData?.["@type"],
+          protocolPath: "hotel",
           schema: protocolDefinition.types.hotel.schema,
           dataFormat: protocolDefinition.types.hotel.dataFormats[0],
           published: true,
@@ -96,7 +96,7 @@ export default function useHotel() {
         },
       });
       console.log(
-        `deleted ${hotelData?.name}. status: ${response.status.code}`
+        `deleted ${hotelData?.businessName}. status: ${response.status.code}`
       );
     } catch (e) {
       console.error(e);

@@ -5,7 +5,6 @@ export type CustomerType = {
   contactNumber: string;
   email: string;
   avatar?: any;
-  "@type": "customer";
 };
 
 export const CustomerTypeInitialFormValues: CustomerType = {
@@ -13,5 +12,4 @@ export const CustomerTypeInitialFormValues: CustomerType = {
   name: "",
   email: "",
   contactNumber: "",
-  "@type": "customer",
 };

@@ -66,7 +66,7 @@ export default function useCustomer() {
         data: customerData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: customerData?.["@type"],
+          protocolPath: 'customer',
           schema: protocolDefinition.types.customer.schema,
           dataFormat: protocolDefinition.types.customer.dataFormats[0],
         },
