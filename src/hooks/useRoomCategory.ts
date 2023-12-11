@@ -1,9 +1,14 @@
 import { DateSort } from "@/enums/dateSort.enum";
 import { RoomCategoryType } from "@/types/roomCategory.type";
 import protocolDefinition from "../app/protocol/protocol.json";
+import { useRouter } from "next/navigation";
 
 export default function useRoomCategory(web5: any) {
-  const getSingleRoomCategory = async (hotelId: string) => {
+  const router = useRouter();
+
+  const getSingleRoomCategory = async (
+    hotelId: string
+  ): Promise<RoomCategoryType | undefined> => {
     let roomCategory: any;
     const { record } = await web5.dwn.records.read({
       message: {
@@ -17,13 +22,14 @@ export default function useRoomCategory(web5: any) {
     return roomCategory;
   };
 
-  const getAllRoomCategories = async () => {
+  const getAllRoomCategories = async (parentId: string) => {
     let sharedList = [];
     if (web5) {
       const { records } = await web5.dwn?.records.query({
         message: {
           filter: {
-            schema: protocolDefinition.types.roomcategory.schema,
+            parentId: parentId,
+            // schema: protocolDefinition.types.roomcategory.schema,
           },
           dateSort: DateSort.CreatedAscending,
         },
@@ -35,27 +41,33 @@ export default function useRoomCategory(web5: any) {
       if (records)
         for (let record of records) {
           const data = await record?.data.json();
-          const list = { record, data, id: record.id };
+          const list = { ...data, id: record.id };
           sharedList.push(list);
         }
     }
     return sharedList;
   };
 
-  const createRoomCategory = async (roomCategoryData: RoomCategoryType) => {
+  const createRoomCategory = async (
+    roomCategoryData: RoomCategoryType,
+    parentId: string
+  ) => {
     try {
       const { record } = await web5.dwn.records.create({
         data: roomCategoryData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: "roomcategory",
+          protocolPath: "hotel/roomcategory",
           schema: protocolDefinition.types.roomcategory.schema,
           dataFormat: protocolDefinition.types.roomcategory.dataFormats[0],
+          parentId: parentId,
+          contextId: parentId,
         },
       });
 
       const data = await record?.data.json();
       const createdRoomCategory = { record, data, id: record.id };
+      router.replace("/hotel/categories");
 
       return createdRoomCategory;
     } catch (e) {

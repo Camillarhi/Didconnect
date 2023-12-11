@@ -3,12 +3,10 @@ import Button from "@/components/button/button";
 import Input from "@/components/input/input";
 import AddRoomModal from "@/components/modals/addRoomModal";
 import TableGroup from "@/components/table/tableGroup";
-import { data, columns } from "@/constants/tempTableData.constant";
+import { columns, data } from "@/constants/tempTableData.constant";
 import { useDisclosure } from "@/hooks";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
 import Image from "next/image";
-import router from "next/router";
-import React from "react";
 
 export default function Rooms() {
   const { isOpen, close, open } = useDisclosure();

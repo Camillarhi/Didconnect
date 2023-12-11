@@ -25,6 +25,8 @@ export default function NavBar({ toggle }: { toggle: () => void }) {
     setMyRecords(readResult);
   };
 
+  console.log({myRecords})
+
   return (
     <div className="bg-[#151628] h-[3.5rem] w-full flex justify-between items-center px-[1.875rem] py-4 shadow-inner border-b border-[#272849] text-white">
       <div

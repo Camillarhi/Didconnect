@@ -10,6 +10,7 @@ export default function StatusBadge({ status }: { status: BookingStatusType }) {
       case StatusEnum.Cancelled:
         return " bg-[#320A1B]";
       case StatusEnum.CheckedOut:
+      case StatusEnum.Inactive:
         return " bg-[#393A4D]";
       case StatusEnum.Reserved:
         return " bg-[#32290A]";

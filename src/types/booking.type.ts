@@ -2,11 +2,11 @@ import { BookingStatusType } from "./bookingStatus.type";
 
 export type BookingType = {
   id?: string;
-  author: string;
-  recipient: string;
+  author: string;//hotel did
+  recipient: string;//guest did
   status: BookingStatusType;
-  checkIn: string;
-  checkOut: string;
+  checkIn: string;//date
+  checkOut: string;//date
   roomId: string;
   roomCategoryName: string;
   roomNo: string;

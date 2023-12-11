@@ -2,34 +2,11 @@
 import CustomerWelcomeTab from "@/components/customerWelcomeTab/customerWelcomeTab";
 import Hotel from "@/components/hotel/hotel";
 import Input from "@/components/input/input";
-import useHotel from "@/hooks/useHotel";
-import useWeb5Instance from "@/hooks/useWeb5Instance";
 import CustomerLayout from "@/layouts/customer/customerLayout";
-import { AccountType } from "@/types/account.type";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 
 export default function Explore() {
-  const [myAccount, setMyAccount] = useState<any>();
-  const { myDid, web5 } = useWeb5Instance() || {};
-  const { getAllHotels,getSingleHotel, } = useHotel(web5);
-
-  useEffect(() => {
-    if (web5) {
-      getRecords();
-    }
-  }, [web5]);
-
-  const getRecords = async () => {
-    const readResult = await getAllHotels();
-    const hh = await getSingleHotel("bafyreicdph6bwtwwrgws4tyy4nlacgff4powsv2gsjplg5vflnlf5ee3yu")
-    console.log({hh})
-    setMyAccount(readResult);
-  };
-
-  console.log({myAccount})
-
   return (
     <CustomerLayout>
       <CustomerWelcomeTab

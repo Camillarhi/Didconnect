@@ -1,8 +1,12 @@
-import React from "react";
-import ModalWrapper from "./modalWrapper/modalWrapper";
+"use client";
 import Image from "next/image";
 import InputGroup from "../input/inputGroup";
-import Input from "../input/input";
+import ModalWrapper from "./modalWrapper/modalWrapper";
+import useGetUserAccount from "@/hooks/useGetUserAccount";
+import useRoomCategory from "@/hooks/useRoomCategory";
+import useWeb5Instance from "@/hooks/useWeb5Instance";
+import { RoomCategoryType } from "@/types/roomCategory.type";
+import { useState, useEffect } from "react";
 
 export default function AddRoomModal({
   isOpen,
@@ -11,6 +15,24 @@ export default function AddRoomModal({
   isOpen: boolean;
   close: () => void;
 }) {
+  const { web5 } = useWeb5Instance() || {};
+  const { getAllRoomCategories } = useRoomCategory(web5);
+  const { myHotel } = useGetUserAccount();
+  const [categories, setCategories] = useState<RoomCategoryType[]>();
+
+  useEffect(() => {
+    if (web5 && myHotel?.id) {
+      getRecords();
+    }
+  }, [web5, myHotel]);
+
+  const getRecords = async () => {
+    if (myHotel?.id) {
+      const readResult = await getAllRoomCategories(myHotel?.id);
+      setCategories(readResult as RoomCategoryType[]);
+    }
+  };
+
   return (
     <ModalWrapper isOpen={isOpen}>
       <div className="w-[32.375rem] h-[19.25rem] px-4 pt-4 pb-6 bg-gray-900 rounded-lg flex-col justify-start items-start inline-flex">
@@ -51,17 +73,15 @@ export default function AddRoomModal({
                   <option value="" className=" bg-black">
                     Select category
                   </option>
-                  <option value="" className=" bg-black">
-                    Last 5 days
-                  </option>
-                  <option value="" className=" bg-black">
-                    Last 1 days
-                  </option>
-                  <option value="" className=" bg-black">
-                    Last 10 days
-                  </option>
+                  {categories &&
+                    categories?.length > 0 &&
+                    categories?.map((category) => (
+                      <option value={category?.id} className=" bg-black">
+                        {category?.name}{" "}
+                      </option>
+                    ))}
                 </select>
-              </div>{" "}
+              </div>
             </div>
           </div>
 
