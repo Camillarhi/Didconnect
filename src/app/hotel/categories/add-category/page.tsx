@@ -29,7 +29,7 @@ export default function AddCategory() {
   const submit = async (data: RoomCategoryType) => {
     data.author = myDid;
     console.log(data);
-    if (myHotel?.id) await createRoomCategory(data, myHotel?.id);
+    if (myHotel?.id) {await createRoomCategory(data, myHotel?.id); }
   };
 
   return (

@@ -29,7 +29,7 @@ export default function useRoomCategory(web5: any) {
         message: {
           filter: {
             parentId: parentId,
-            // schema: protocolDefinition.types.roomcategory.schema,
+            schema: protocolDefinition.types.roomcategory.schema,
           },
           dateSort: DateSort.CreatedAscending,
         },
@@ -41,7 +41,7 @@ export default function useRoomCategory(web5: any) {
       if (records)
         for (let record of records) {
           const data = await record?.data.json();
-          const list = { ...data, id: record.id };
+          const list = { ...data, id: record?.id };
           sharedList.push(list);
         }
     }
@@ -66,7 +66,7 @@ export default function useRoomCategory(web5: any) {
       });
 
       const data = await record?.data.json();
-      const createdRoomCategory = { record, data, id: record.id };
+      const createdRoomCategory = { record, data, id: record?.id };
       router.replace("/hotel/categories");
 
       return createdRoomCategory;
@@ -88,7 +88,7 @@ export default function useRoomCategory(web5: any) {
       });
 
       // Update the record in DWN
-      await record.update({ data: roomCategoryData });
+      await record?.update({ data: roomCategoryData });
     } catch (e) {
       console.error(e);
       return;

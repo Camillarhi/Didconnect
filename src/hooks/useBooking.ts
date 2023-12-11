@@ -35,7 +35,7 @@ export default function useBooking(web5: any) {
       if (records)
         for (let record of records) {
           const data = await record?.data.json();
-          const list = { record, data, id: record.id };
+          const list = { record, data, id: record?.id };
           sharedList.push(list);
         }
     }
@@ -56,9 +56,9 @@ export default function useBooking(web5: any) {
       });
 
       const data = await record?.data.json();
-      const createdBooking = { record, data, id: record.id };
+      const createdBooking = { record, data, id: record?.id };
 
-      const { status: sendStatus } = await record.send(bookingData?.recipient);
+      const { status: sendStatus } = await record?.send(bookingData?.recipient);
 
       if (sendStatus.code !== 202) {
         console.log("Unable to send to target did:" + sendStatus);
@@ -86,7 +86,7 @@ export default function useBooking(web5: any) {
       });
 
       // Update the record in DWN
-      await record.update({ data: bookingData });
+      await record?.update({ data: bookingData });
     } catch (e) {
       console.error(e);
       return;

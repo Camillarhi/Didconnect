@@ -75,8 +75,7 @@
             "can": "read"
           },
           {
-            "who": "author",
-            "of": "room",
+            "who": "anyone",
             "can": "write"
           }
         ],

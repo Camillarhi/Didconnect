@@ -18,7 +18,7 @@ export default function useHotel(web5: any) {
     });
 
     const data = await record?.data.json();
-    hotel = { ...data, id: record.id };
+    hotel = { ...data, id: record?.id };
 
     console.log({ hotel });
     return hotel;
@@ -75,7 +75,7 @@ export default function useHotel(web5: any) {
     if (response.status.code === 200) {
       const receivedDings = await Promise.all(
         response.records.map(async (record: any) => {
-          const data = await record.data.json();
+          const data = await record?.data.json();
           return data;
         })
       );
@@ -101,7 +101,7 @@ export default function useHotel(web5: any) {
       });
 
       const data = await record?.data.json();
-      const createdHotel = { record, data, id: record.id };
+      const createdHotel = { record, data, id: record?.id };
       router.replace("/hotel");
 
       return createdHotel;
@@ -123,7 +123,7 @@ export default function useHotel(web5: any) {
       });
 
       // Update the record in DWN
-      await record.update({ data: hotelData });
+      await record?.update({ data: hotelData });
     } catch (e) {
       console.error(e);
       return;

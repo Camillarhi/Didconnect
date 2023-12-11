@@ -5,11 +5,36 @@ import AddRoomModal from "@/components/modals/addRoomModal";
 import TableGroup from "@/components/table/tableGroup";
 import { columns, data } from "@/constants/tempTableData.constant";
 import { useDisclosure } from "@/hooks";
+import useGetUserAccount from "@/hooks/useGetUserAccount";
+import useRoom from "@/hooks/useRoom";
+import useRoomCategory from "@/hooks/useRoomCategory";
+import useWeb5Instance from "@/hooks/useWeb5Instance";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
+import { RoomType } from "@/types/room.type";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Rooms() {
   const { isOpen, close, open } = useDisclosure();
+  const { web5 } = useWeb5Instance() || {};
+  const { getAllRooms } = useRoom(web5);
+  const { myHotel } = useGetUserAccount();
+  const [rooms, setRooms] = useState<RoomType[]>();
+
+  useEffect(() => {
+    if (web5 && myHotel?.id) {
+      getRecords();
+    }
+  }, [web5, myHotel, isOpen]);
+
+  const getRecords = async () => {
+    if (myHotel?.id) {
+      const readResult = await getAllRooms(myHotel?.id);
+      setRooms(readResult as RoomType[]);
+    }
+  };
+
+  console.log({rooms})
 
   return (
     <HotelLayout>

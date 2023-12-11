@@ -52,7 +52,7 @@ export default function useCustomer(web5: any) {
       if (records)
         for (let record of records) {
           const data = await record?.data.json();
-          const list = { record, data, id: record.id };
+          const list = { record, data, id: record?.id };
           sharedList.push(list);
         }
     }
@@ -72,7 +72,7 @@ export default function useCustomer(web5: any) {
       });
 
       const data = await record?.data.json();
-      const createdCustomer = { record, data, id: record.id };
+      const createdCustomer = { record, data, id: record?.id };
       router.replace("/customer/login");
 
       return createdCustomer;
@@ -94,7 +94,7 @@ export default function useCustomer(web5: any) {
       });
 
       // Update the record in DWN
-      await record.update({ data: customerData });
+      await record?.update({ data: customerData });
     } catch (e) {
       console.error(e);
       return;

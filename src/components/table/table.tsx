@@ -26,7 +26,7 @@ export default function Table({ data, columns, onClick }: TableProps) {
   return (
     <div className=" w-[90vw] h-full max-w-[90vw] md:w-full md:max-w-full max-h-full overflow-auto">
       <table className=" w-full table-auto">
-        <thead className="whitespace-nowrap sticky top-0 z-20 bg-[#191A2F] text-[#DBDCDE] font-medium uppercase">
+        <thead className="whitespace-nowrap sticky top-0 z-20 bg-[#191A2F] text-[#DBDCDE] font-medium uppercase text-xs">
           <tr>
             {columns.map(({ column, key }) => (
               <th key={key} className=" pt-6 pb-[1.3125rem] text-center ">

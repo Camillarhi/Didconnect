@@ -7,6 +7,9 @@ import useRoomCategory from "@/hooks/useRoomCategory";
 import useWeb5Instance from "@/hooks/useWeb5Instance";
 import { RoomCategoryType } from "@/types/roomCategory.type";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { RoomType, RoomTypeInitialValue } from "@/types/room.type";
+import useRoom from "@/hooks/useRoom";
 
 export default function AddRoomModal({
   isOpen,
@@ -15,10 +18,21 @@ export default function AddRoomModal({
   isOpen: boolean;
   close: () => void;
 }) {
-  const { web5 } = useWeb5Instance() || {};
+  const { web5, myDid } = useWeb5Instance() || {};
   const { getAllRoomCategories } = useRoomCategory(web5);
+  const { createRoom } = useRoom(web5);
   const { myHotel } = useGetUserAccount();
   const [categories, setCategories] = useState<RoomCategoryType[]>();
+  const [selectedCategory, setSelectedCategory] = useState<RoomCategoryType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<RoomType>({
+    mode: "all",
+    defaultValues: RoomTypeInitialValue,
+  });
 
   useEffect(() => {
     if (web5 && myHotel?.id) {
@@ -33,9 +47,28 @@ export default function AddRoomModal({
     }
   };
 
+  const submit = async (data: RoomType) => {
+    data.floorNumber = selectedCategory?.floor;
+    data.author = myDid;
+    data.price = selectedCategory?.price;
+    data.roomCategoryName = selectedCategory?.name;
+
+    console.log({ data }, { selectedCategory });
+    if (myHotel?.id) {
+      await createRoom(data, close, myHotel.id);
+      reset();
+    }
+  };
+
+  const selectCategory = (id: string) => {
+    const category = categories?.find((a) => a?.id === id);
+
+    if (category) setSelectedCategory(category);
+  };
+
   return (
     <ModalWrapper isOpen={isOpen}>
-      <div className="w-[32.375rem] h-[19.25rem] px-4 pt-4 pb-6 bg-gray-900 rounded-lg flex-col justify-start items-start inline-flex">
+      <div className="w-[32.375rem] h-fit px-4 pt-4 pb-6 bg-gray-900 rounded-lg flex-col justify-start items-start inline-flex">
         <div className="self-stretch pb-4 shadow-inner justify-between items-center inline-flex border-b border-[#272849]">
           <div className="text-white text-sm font-medium capitalize leading-tight">
             Add new room
@@ -57,32 +90,50 @@ export default function AddRoomModal({
               type="number"
               className="h-9 "
               placeHolder="101"
-              props={{}}
+              props={{
+                ...register("roomNumber", {
+                  required: "*Please enter room number",
+                }),
+              }}
             />
-
+            {errors.roomNumber?.message && (
+              <p className=" text-[red] text-sm">
+                {errors.roomNumber?.message}
+              </p>
+            )}
             <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex w-full">
               <div className="text-white text-sm font-normal leading-tight">
                 Category
               </div>
               <div className=" border w-full h-9 border-indigo-950">
                 <select
-                  name=""
-                  id=""
                   className=" bg-transparent w-full focus:outline-none text-sm"
+                  {...register("roomCategoryId", {
+                    onChange: (e) => selectCategory(e?.target?.value),
+                    required: "*Please select a category",
+                  })}
                 >
                   <option value="" className=" bg-black">
                     Select category
                   </option>
                   {categories &&
                     categories?.length > 0 &&
-                    categories?.map((category) => (
-                      <option value={category?.id} className=" bg-black">
-                        {category?.name}{" "}
-                      </option>
-                    ))}
+                    categories?.map((category) => {
+                      if (category.status === "Active")
+                        return (
+                          <option value={category?.id} className=" bg-black">
+                            {category?.name}{" "}
+                          </option>
+                        );
+                    })}
                 </select>
               </div>
             </div>
+            {errors.roomCategoryId?.message && (
+              <p className=" text-[red] text-sm">
+                {errors.roomCategoryId?.message}
+              </p>
+            )}
           </div>
 
           <div className="w-full h-10 justify-end items-start gap-4 inline-flex mt-5">
@@ -94,14 +145,15 @@ export default function AddRoomModal({
                 Cancel
               </div>
             </div>
-            <div
+            <button
+              type="button"
               className=" px-6 py-2.5 bg-violet-800 rounded-full flex-col justify-center items-center gap-2.5 inline-flex cursor-pointer"
-              onClick={close}
+              onClick={handleSubmit(submit)}
             >
               <div className="text-center text-white text-sm font-medium capitalize leading-tight">
                 Save
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </div>
