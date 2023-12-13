@@ -64,7 +64,9 @@ export default function useRoom(web5: any) {
       const data = await record?.data.json();
       const createdRoom = { record, data, id: record?.id };
 
+      getAllRooms(parentId);
       callback();
+
       return createdRoom;
     } catch (e) {
       console.error(e);

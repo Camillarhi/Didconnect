@@ -1,8 +1,11 @@
 import { DateSort } from "@/enums/dateSort.enum";
 import { BookingType } from "@/types/booking.type";
 import protocolDefinition from "../app/protocol/protocol.json";
+import { useRouter } from "next/navigation";
 
 export default function useBooking(web5: any) {
+  const router = useRouter();
+
   const getSingleBooking = async (hotelId: string) => {
     let booking: any;
     const { record } = await web5.dwn.records.read({
@@ -17,12 +20,13 @@ export default function useBooking(web5: any) {
     return booking;
   };
 
-  const getAllBookings = async () => {
+  const getAllBookings = async (parentId: string) => {
     let sharedList = [];
     if (web5) {
       const { records } = await web5.dwn?.records.query({
         message: {
           filter: {
+            parentId: parentId,
             schema: protocolDefinition.types.booking.schema,
           },
           dateSort: DateSort.CreatedAscending,
@@ -54,20 +58,25 @@ export default function useBooking(web5: any) {
           recipient: bookingData?.recipient,
         },
       });
+      if (record) {
+        const data = await record?.data.json();
+        const createdBooking = { record, data, id: record?.id };
 
-      const data = await record?.data.json();
-      const createdBooking = { record, data, id: record?.id };
+        const { status: sendStatus } = await record.send(
+          bookingData?.recipient
+        );
 
-      const { status: sendStatus } = await record?.send(bookingData?.recipient);
+        if (sendStatus.code !== 202) {
+          console.log("Unable to send to target did:" + sendStatus);
+          return;
+        } else {
+          console.log("Shared list sent to recipient");
+        }
 
-      if (sendStatus.code !== 202) {
-        console.log("Unable to send to target did:" + sendStatus);
-        return;
-      } else {
-        console.log("Shared list sent to recipient");
+        router.replace("/hotel/bookings");
+
+        return createdBooking;
       }
-
-      return createdBooking;
     } catch (e) {
       console.error(e);
       return;

@@ -3,11 +3,9 @@ import Button from "@/components/button/button";
 import Input from "@/components/input/input";
 import AddRoomModal from "@/components/modals/addRoomModal";
 import TableGroup from "@/components/table/tableGroup";
-import { columns, data } from "@/constants/tempTableData.constant";
 import { useDisclosure } from "@/hooks";
 import useGetUserAccount from "@/hooks/useGetUserAccount";
 import useRoom from "@/hooks/useRoom";
-import useRoomCategory from "@/hooks/useRoomCategory";
 import useWeb5Instance from "@/hooks/useWeb5Instance";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
 import { RoomType } from "@/types/room.type";
@@ -34,7 +32,26 @@ export default function Rooms() {
     }
   };
 
-  console.log({rooms})
+  const roomColumn = [
+    { column: "Room No.", key: "Room No." },
+    { column: "Category", key: "Category" },
+    { column: "Booking status", key: "Booking status" },
+    { column: "Price", key: "Price" },
+    { column: "FLOOR", key: "FLOOR" },
+  ];
+
+  const roomTableData = () => {
+    if (!rooms) return [];
+
+    return rooms?.map((room) => ({
+      key: room?.id,
+      "Room No.": room?.roomNumber,
+      Category: room?.roomCategoryName,
+      "Booking status": room.status,
+      Price: `$${room?.price}/night`,
+      FLOOR: room?.floorNumber,
+    }));
+  };
 
   return (
     <HotelLayout>
@@ -114,7 +131,7 @@ export default function Rooms() {
 
         {/* table */}
         <div className=" w-full max-w-full h-[30.9375rem] max-h-[30.9375rem]">
-          <TableGroup data={data} columns={columns} />
+          <TableGroup data={roomTableData()} columns={roomColumn} />
         </div>
       </div>
       <AddRoomModal close={close} isOpen={isOpen} />
