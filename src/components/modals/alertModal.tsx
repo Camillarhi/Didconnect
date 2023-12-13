@@ -5,9 +5,13 @@ import Image from "next/image";
 export default function AlertModal({
   isOpen,
   close,
+  title,
+  description,
 }: {
   isOpen: boolean;
   close: () => void;
+  title: string;
+  description: string;
 }) {
   return (
     <ModalWrapper isOpen={isOpen}>
@@ -19,16 +23,15 @@ export default function AlertModal({
               src={"/assets/svgs/warning.svg"}
               height={72}
               width={72}
-            />{" "}
+            />
           </div>
           <div className="text-white text-sm font-medium capitalize leading-tight">
-            Please switch to Desktop
+            {title}
           </div>
           <div className="self-stretch h-[3.75rem] flex-col justify-start items-center gap-6 flex">
             <div className="self-stretch h-[3.75rem] flex-col justify-start items-center gap-4 flex">
               <div className="self-stretch text-center text-zinc-300 text-sm font-normal leading-tight">
-                This app is more accessible on desktop devices for Hotel Owners.
-                Kindly switch or proceed as a Hotel Guest
+                {description}
               </div>
             </div>
           </div>

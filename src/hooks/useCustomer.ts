@@ -1,29 +1,43 @@
 import { DateSort } from "@/enums/dateSort.enum";
-import { useWeb5Connect } from "@/hooks";
 import { CustomerType } from "@/types/customer.type";
-import protocolDefinition from "../../protocol/protocol.json";
+import protocolDefinition from "../app/protocol/protocol.json";
+import { useRouter } from "next/navigation";
 
-export default function useCustomer() {
-  const { web5 } = useWeb5Connect();
-
-  const getSingleCustomer = async (hotelId: string) => {
+export default function useCustomer(web5: any) {
+  const router = useRouter();
+  const getSingleCustomer = async (customerId: string) => {
     let customer: any;
     const { record } = await web5.dwn.records.read({
       message: {
         filter: {
-          recordId: hotelId,
+          recordId: customerId,
         },
       },
     });
 
-    customer = await record.data.json();
+    customer = await record?.data.json();
+    return customer;
+  };
+
+  const getCustomerForLoggedInUser = async () => {
+    let customer: any;
+    const { record } = await web5.dwn.records.read({
+      message: {
+        filter: {
+          protocol: protocolDefinition.protocol,
+          protocolPath: "customer",
+        },
+      },
+    });
+
+    customer = await record?.data.json();
     return customer;
   };
 
   const getAllCustomers = async () => {
     let sharedList = [];
     if (web5) {
-      const { records } = await web5?.dwn?.records.query({
+      const { records } = await web5.dwn?.records.query({
         message: {
           filter: {
             schema: protocolDefinition.types.customer.schema,
@@ -37,8 +51,8 @@ export default function useCustomer() {
       // add entry to sharedList
       if (records)
         for (let record of records) {
-          const data = await record.data.json();
-          const list = { record, data, id: record.id };
+          const data = await record?.data.json();
+          const list = { record, data, id: record?.id };
           sharedList.push(list);
         }
     }
@@ -51,14 +65,15 @@ export default function useCustomer() {
         data: customerData,
         message: {
           protocol: protocolDefinition.protocol,
-          protocolPath: customerData?.["@type"],
+          protocolPath: "customer",
           schema: protocolDefinition.types.customer.schema,
           dataFormat: protocolDefinition.types.customer.dataFormats[0],
         },
       });
 
-      const data = await record.data.json();
-      const createdCustomer = { record, data, id: record.id };
+      const data = await record?.data.json();
+      const createdCustomer = { record, data, id: record?.id };
+      router.replace("/customer/login");
 
       return createdCustomer;
     } catch (e) {
@@ -79,7 +94,7 @@ export default function useCustomer() {
       });
 
       // Update the record in DWN
-      await record.update({ data: customerData });
+      await record?.update({ data: customerData });
     } catch (e) {
       console.error(e);
       return;
@@ -95,7 +110,7 @@ export default function useCustomer() {
         },
       });
       console.log(
-        `deleted ${customerData?.firstName} ${customerData?.lastName}. status: ${response.status.code}`
+        `deleted ${customerData?.name}. status: ${response.status.code}`
       );
     } catch (e) {
       console.error(e);
@@ -109,5 +124,6 @@ export default function useCustomer() {
     getAllCustomers,
     createCustomer,
     deleteCustomerData,
+    getCustomerForLoggedInUser,
   };
 }

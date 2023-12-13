@@ -1,7 +1,11 @@
 {
-  "protocol": "https://didconnect.org/did-connect",
+  "protocol": "https://didconnect.org/did-connectt",
   "published": true,
   "types": {
+    "account": {
+      "schema": "https://didconnect.org/did-connect/schemas/account.json",
+      "dataFormats": ["application/json"]
+    },
     "hotel": {
       "schema": "https://didconnect.org/did-connect/schemas/hotel.json",
       "dataFormats": ["application/json"]
@@ -28,6 +32,18 @@
     }
   },
   "structure": {
+    "account": {
+      "$actions": [
+        {
+          "who": "anyone",
+          "can": "read"
+        },
+        {
+          "who": "anyone",
+          "can": "write"
+        }
+      ]
+    },
     "hotel": {
       "$actions": [
         {
@@ -59,8 +75,7 @@
             "can": "read"
           },
           {
-            "who": "author",
-            "of": "room",
+            "who": "anyone",
             "can": "write"
           }
         ],

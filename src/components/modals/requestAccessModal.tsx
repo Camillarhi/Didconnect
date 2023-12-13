@@ -43,12 +43,14 @@ export default function RequestAccessModal({
               type="text"
               className="h-9 "
               placeHolder="Jordan@Peters.com"
+              props={{}}
             />
             <InputGroup
               label="Name"
               type="text"
               className="h-9 "
               placeHolder="Jordan Peters"
+              props={{}}
             />
 
             <InputGroup
@@ -56,6 +58,7 @@ export default function RequestAccessModal({
               type="text"
               className="h-9 "
               placeHolder="Jordan Peters"
+              props={{}}
             />
 
             <div className=" flex w-full justify-between gap-4">

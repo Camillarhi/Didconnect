@@ -3,6 +3,7 @@ import Input, { InputProps } from "./input";
 
 export type InputGroupProps = InputProps & {
   label: string;
+  props?: any;
 };
 
 export default function InputGroup({
@@ -11,6 +12,7 @@ export default function InputGroup({
   className,
   disabled = false,
   label,
+  props,
 }: InputGroupProps) {
   return (
     <div className="self-stretch h-[3.75rem] flex-col justify-start items-start gap-1 flex">
@@ -22,6 +24,7 @@ export default function InputGroup({
         className={className}
         placeHolder={placeHolder}
         disabled={disabled}
+        {...props}
       />
     </div>
   );

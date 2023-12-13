@@ -5,13 +5,12 @@ import Input from "@/components/input/input";
 import CustomerLayout from "@/layouts/customer/customerLayout";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default function Explore() {
   return (
     <CustomerLayout>
       <CustomerWelcomeTab
-      title=" Hello Rita,"
+        title=" Hello Rita,"
         text="Where would you like to go?"
       />
       <div className=" my-6 flex items-center w-full h-fit gap-x-2">

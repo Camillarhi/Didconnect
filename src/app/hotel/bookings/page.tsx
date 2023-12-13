@@ -1,15 +1,58 @@
 "use client";
 import Button from "@/components/button/button";
 import Input from "@/components/input/input";
+import StatusBadge from "@/components/statusBadge/statusBadge";
 import TableGroup from "@/components/table/tableGroup";
-import { columns, data } from "@/constants/tempTableData.constant";
+import useBooking from "@/hooks/useBooking";
+import useWeb5Instance from "@/hooks/useWeb5Instance";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
+import { BookingType } from "@/types/booking.type";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { useEffect, useState } from "react";
 
 export default function Bookings() {
   const router = useRouter();
+  const { web5 } = useWeb5Instance() || {};
+  const { getAllBookings } = useBooking(web5);
+  const [bookings, setBookings] = useState<BookingType[]>();
+
+  useEffect(() => {
+    if (web5) {
+      getRecords();
+    }
+  }, [web5]);
+
+  const getRecords = async () => {
+    const readResult = await getAllBookings();
+    setBookings(readResult as BookingType[]);
+  };
+
+  console.log({ bookings });
+
+  const bookingColumn = [
+    { column: "Guest", key: "Guest" },
+    { column: "Room No.", key: "Room No." },
+    { column: "Room category", key: "Room category" },
+    { column: "Status", key: "Status" },
+    { column: "Check-in date", key: "Check-in date" },
+    { column: "Check-out date", key: "Check-out date" },
+  ];
+
+  const bookingTableData = () => {
+    if (!bookings) return [];
+
+    return bookings?.map((booking) => ({
+      key: booking?.id,
+      "Room No.": booking?.roomNo,
+      "Room category": booking?.roomCategoryName,
+      Guest: booking?.name,
+      Status: <StatusBadge status={booking.status} />,
+      "Check-in date": booking.checkInDate,
+      "Check-out date": booking?.checkOutDate,
+    }));
+  };
+
   return (
     <HotelLayout>
       <div className=" mb-[1.875rem] flex justify-between">
@@ -91,7 +134,7 @@ export default function Bookings() {
 
         {/* table */}
         <div className=" w-full max-w-full h-[30.9375rem] max-h-[30.9375rem]">
-          <TableGroup data={data} columns={columns} />
+          <TableGroup data={bookingTableData()} columns={bookingColumn} />
         </div>
       </div>
     </HotelLayout>

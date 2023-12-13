@@ -1,38 +1,15 @@
 "use client";
-import { useEffect } from "react";
 
-/*
-Needs globalThis.crypto polyfill. 
-This is *not* the crypto you're thinking of.
-It's the original crypto...CRYPTOGRAPHY.
-*/
 import Alerts from "@/components/alerts/alerts";
 import Button from "@/components/button/button";
 import StatisticsCards from "@/components/statisticsCard/statisticsCards";
 import TableGroup from "@/components/table/tableGroup";
 import { columns, data } from "@/constants/tempTableData.constant";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
-import { webcrypto } from "node:crypto";
 import { useRouter } from "next/navigation";
-
-// @ts-ignore
-if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 export default function Home() {
   const router = useRouter();
-
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("./service-worker.js", { scope: "/" })
-        .then(function (registration) {
-          console.log("service worker registered", registration.scope);
-        });
-      navigator.serviceWorker.ready.then(function (registration) {
-        console.log("service worker is ready", registration.scope);
-      });
-    }
-  }, []);
 
   return (
     <HotelLayout>

@@ -4,4 +4,6 @@ export type BookingStatusType =
   | "Cancelled"
   | "Checked-out"
   | "Pending"
-  | "Rejected";
+  | "Rejected"
+  | "Inactive"
+  | "In-progress";

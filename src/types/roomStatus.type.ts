@@ -1,1 +1,1 @@
-export type RoomStatusType = "Occupied" | "Unoccupied" | "Out of Service";
+export type RoomStatusType = "Booked" | "Reserved" | "Open" | "Out of Service";

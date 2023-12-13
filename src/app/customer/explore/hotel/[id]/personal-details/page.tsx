@@ -29,6 +29,7 @@ export default function PersonalDetails({
               type="text"
               className="h-9 "
               placeHolder="Jordan Peters"
+              props={{}}
             />
             <div className="justify-start items-start inline-flex">
               <Checkbox label="Share with hotel" />
@@ -41,6 +42,7 @@ export default function PersonalDetails({
               type="text"
               className="h-9 "
               placeHolder="Jordan@Peters.com"
+              props={{}}
             />
             <div className="justify-start items-start inline-flex">
               <Checkbox label="Share with hotel" />
@@ -52,6 +54,7 @@ export default function PersonalDetails({
               type="text"
               className="h-9 "
               placeHolder="+23490883932"
+              props={{}}
             />
             <div className="justify-start items-start inline-flex">
               <Checkbox label="Share with hotel" />

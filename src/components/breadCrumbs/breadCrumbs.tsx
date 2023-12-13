@@ -16,7 +16,6 @@ export default function BreadCrumbs() {
       }
 
       const processedPath = processPathName();
-      console.log(processedPath);
       setFirstCrumbText(processedPath[0]);
       setSecondCrumbText(processedPath[1]);
     }

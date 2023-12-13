@@ -2,16 +2,28 @@ import { BookingStatusType } from "./bookingStatus.type";
 
 export type BookingType = {
   id?: string;
-  author: string;
-  recipient: string;
+  author: string; //hotel did
+  recipient: string; //guest did
   status: BookingStatusType;
-  checkIn: string;
-  checkOut: string;
+  checkInDate: string;
+  checkOutDate: string;
   roomId: string;
   roomCategoryName: string;
-  roomNo: string;
-  "@type": "booking";
+  roomCategoryId: string;
+  roomNo: number|string;
   name?: string;
   email?: string;
   phoneNumber?: string;
+};
+
+export const BookingTypeInitialValue: BookingType = {
+  author: "",
+  recipient: "",
+  status: "Pending",
+  checkInDate: "",
+  checkOutDate: "",
+  roomId: "",
+  roomCategoryName: "",
+  roomNo: "",
+  roomCategoryId: "",
 };

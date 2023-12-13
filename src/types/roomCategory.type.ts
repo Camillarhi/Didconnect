@@ -3,6 +3,15 @@ export type RoomCategoryType = {
   author: string;
   name: string;
   description: string;
-  price: number;
-  "@type": "roomcategory";
+  price?: number;
+  status: "Active" | "Inactive";
+  rooms?: number;
+  floor?: number;
+};
+
+export const roomCategortTypesInitialValue: RoomCategoryType = {
+  author: "",
+  name: "",
+  description: "",
+  status: "Active",
 };

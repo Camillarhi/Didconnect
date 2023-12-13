@@ -3,15 +3,55 @@ import Button from "@/components/button/button";
 import Input from "@/components/input/input";
 import AddRoomModal from "@/components/modals/addRoomModal";
 import TableGroup from "@/components/table/tableGroup";
-import { data, columns } from "@/constants/tempTableData.constant";
 import { useDisclosure } from "@/hooks";
+import useGetUserAccount from "@/hooks/useGetUserAccount";
+import useRoom from "@/hooks/useRoom";
+import useWeb5Instance from "@/hooks/useWeb5Instance";
 import HotelLayout from "@/layouts/hotel/hotelLayout";
+import { RoomType } from "@/types/room.type";
 import Image from "next/image";
-import router from "next/router";
-import React from "react";
+import { useEffect, useState } from "react";
 
 export default function Rooms() {
   const { isOpen, close, open } = useDisclosure();
+  const { web5 } = useWeb5Instance() || {};
+  const { getAllRooms } = useRoom(web5);
+  const { myHotel } = useGetUserAccount();
+  const [rooms, setRooms] = useState<RoomType[]>();
+
+  useEffect(() => {
+    if (web5 && myHotel?.id) {
+      getRecords();
+    }
+  }, [web5, myHotel, isOpen]);
+
+  const getRecords = async () => {
+    if (myHotel?.id) {
+      const readResult = await getAllRooms(myHotel?.id);
+      setRooms(readResult as RoomType[]);
+    }
+  };
+
+  const roomColumn = [
+    { column: "Room No.", key: "Room No." },
+    { column: "Category", key: "Category" },
+    { column: "Booking status", key: "Booking status" },
+    { column: "Price", key: "Price" },
+    { column: "FLOOR", key: "FLOOR" },
+  ];
+
+  const roomTableData = () => {
+    if (!rooms) return [];
+
+    return rooms?.map((room) => ({
+      key: room?.id,
+      "Room No.": room?.roomNumber,
+      Category: room?.roomCategoryName,
+      "Booking status": room.status,
+      Price: `$${room?.price}/night`,
+      FLOOR: room?.floorNumber,
+    }));
+  };
 
   return (
     <HotelLayout>
@@ -91,7 +131,7 @@ export default function Rooms() {
 
         {/* table */}
         <div className=" w-full max-w-full h-[30.9375rem] max-h-[30.9375rem]">
-          <TableGroup data={data} columns={columns} />
+          <TableGroup data={roomTableData()} columns={roomColumn} />
         </div>
       </div>
       <AddRoomModal close={close} isOpen={isOpen} />

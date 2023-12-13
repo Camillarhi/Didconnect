@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Web5Provider } from "@/context/web5Context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,9 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/logo512.png"></link>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Web5Provider>{children}</Web5Provider>
+      </body>
     </html>
   );
 }
