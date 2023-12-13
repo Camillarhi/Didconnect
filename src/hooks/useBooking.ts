@@ -56,7 +56,7 @@ export default function useBooking(web5: any) {
           schema: protocolDefinition.types.booking.schema,
           dataFormat: protocolDefinition.types.booking.dataFormats[0],
           recipient: bookingData?.recipient,
-          // published: true,
+          published: true,
         },
       });
       if (record) {
