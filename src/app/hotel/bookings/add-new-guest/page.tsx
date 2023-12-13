@@ -65,11 +65,11 @@ export default function AddNewGuest() {
     if (room) setSelectedRoom(room);
   };
 
-  console.log({myDid})
+  console.log({ myDid });
 
   const submit = async (data: BookingType) => {
     data.author = myDid;
-    data.status = "Pending";
+    data.status = "In-progress";
     data.roomId = selectedRoom?.id!;
     data.roomCategoryName = selectedCategory?.name!;
     data.roomCategoryId = selectedCategory?.id!;
@@ -100,7 +100,7 @@ export default function AddNewGuest() {
               </div>
             </div>
 
-<p>{myDid}</p>
+            <p>{myDid}</p>
             {formStep === 1 && (
               <>
                 <div className=" w-[38.3125rem] h-fit px-6 pt-6 pb-8 flex flex-col gap-6 border border-[#272849] rounded-md">

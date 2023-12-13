@@ -20,13 +20,13 @@ export default function useBooking(web5: any) {
     return booking;
   };
 
-  const getAllBookings = async (parentId: string) => {
+  const getAllBookings = async () => {
     let sharedList = [];
     if (web5) {
       const { records } = await web5.dwn?.records.query({
         message: {
           filter: {
-            parentId: parentId,
+            protocol: protocolDefinition.protocol,
             schema: protocolDefinition.types.booking.schema,
           },
           dateSort: DateSort.CreatedAscending,
@@ -39,7 +39,7 @@ export default function useBooking(web5: any) {
       if (records)
         for (let record of records) {
           const data = await record?.data.json();
-          const list = { record, data, id: record?.id };
+          const list = { ...data, id: record?.id };
           sharedList.push(list);
         }
     }
@@ -56,6 +56,7 @@ export default function useBooking(web5: any) {
           schema: protocolDefinition.types.booking.schema,
           dataFormat: protocolDefinition.types.booking.dataFormats[0],
           recipient: bookingData?.recipient,
+          // published: true,
         },
       });
       if (record) {

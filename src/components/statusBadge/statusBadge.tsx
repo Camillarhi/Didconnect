@@ -13,6 +13,7 @@ export default function StatusBadge({ status }: { status: BookingStatusType }) {
       case StatusEnum.Inactive:
         return " bg-[#393A4D]";
       case StatusEnum.Reserved:
+      case StatusEnum.Inprogress:
         return " bg-[#32290A]";
     }
 

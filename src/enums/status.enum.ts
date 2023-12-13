@@ -4,4 +4,5 @@ export enum StatusEnum {
   Cancelled = "Cancelled",
   CheckedOut = "Checked-out",
   Inactive = "Inactive",
+  Inprogress = "In-progress",
 }
