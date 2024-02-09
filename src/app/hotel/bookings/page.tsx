@@ -14,14 +14,25 @@ import { useEffect, useState } from "react";
 export default function Bookings() {
   const router = useRouter();
   const { web5 } = useWeb5Instance() || {};
-  const { getAllBookings } = useBooking(web5);
+  const { getAllBookings, getSingleBooking } = useBooking(web5);
   const [bookings, setBookings] = useState<BookingType[]>();
+  const [booking, setBooking] = useState<any>();
 
   useEffect(() => {
     if (web5) {
       getRecords();
+      getSingleRecords();
     }
   }, [web5]);
+
+  const getSingleRecords = async () => {
+    const readResult = await getSingleBooking(
+      "bafyreiadpe7xmrzi3jtu2cmx4delcfmpx2wfk7posyccexxicgyzqe6vzm"
+    );
+    setBooking(readResult);
+  };
+
+  console.log("booking data", { booking });
 
   const getRecords = async () => {
     const readResult = await getAllBookings();

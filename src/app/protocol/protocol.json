@@ -113,13 +113,7 @@
           "can": "write"
         },
         {
-          "who": "author",
-          "of": "booking",
-          "can": "read"
-        },
-        {
-          "who": "recipient",
-          "of": "booking",
+          "who": "anyone",
           "can": "read"
         }
       ]

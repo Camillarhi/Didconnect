@@ -43,6 +43,7 @@ export default function AddRoomModal({
   const getRecords = async () => {
     if (myHotel?.id) {
       const readResult = await getAllRoomCategories(myHotel?.id);
+      console.log({readResult})
       setCategories(readResult as RoomCategoryType[]);
     }
   };
@@ -65,7 +66,7 @@ export default function AddRoomModal({
 
     if (category) setSelectedCategory(category);
   };
-
+console.log({categories})
   return (
     <ModalWrapper isOpen={isOpen}>
       <div className="w-[32.375rem] h-fit px-4 pt-4 pb-6 bg-gray-900 rounded-lg flex-col justify-start items-start inline-flex">
